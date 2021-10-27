@@ -16,8 +16,8 @@ struct McTestGraspController_DLLAPI McTestGraspController : public mc_control::f
     
     // Tasks
     std::shared_ptr<mc_tasks::CoMTask> comTask;
-    std::shared_ptr<mc_tasks::SurfaceTransformTask> leftHandTask;
-		std::shared_ptr<mc_tasks::SurfaceTransformTask> rightHandTask;
+    std::shared_ptr<mc_tasks::SurfaceTransformTask> leftHandTask_;
+		std::shared_ptr<mc_tasks::SurfaceTransformTask> rightHandTask_;
 
 private:
     mc_rtc::Configuration config_;

@@ -30,19 +30,36 @@ constraints:
 collisions:
 - type: collision
   useMinimal: true
+  collisions:
+    - body1: LARM_*
+      body2: RARM_*
+      iDist: 0.05
+      sDist: 0.01
+    - body1: LARM_*
+      body2: RHAND_*
+      iDist: 0.05
+      sDist: 0.01
+    - body1: LHAND_*
+      body2: RARM_*
+      iDist: 0.05
+      sDist: 0.01
+    - body1: LHAND_*
+      body2: RHAND_*
+      iDist: 0.05
+      sDist: 0.01
 # Initial set of contacts
 contacts:
-- r1: jvrc1
+- r1: hrp2_drc
   r2: ground
-  r1Surface: LeftFoot
+  r1Surface: LFullSole
   r2Surface: AllGround
-- r1: jvrc1
+- r1: hrp2_drc
   r2: ground
-  r1Surface: RightFoot
+  r1Surface: RFullSole
   r2Surface: AllGround
 
 # Some options for a specific robot
-jvrc1:
+hrp2_drc:
   posture:
     stiffness: 1
     weight: 10
@@ -53,6 +70,19 @@ jvrc1:
 states: {}
 # Transitions map
 transitions:
-- [McTestGraspController_Initial, OK, McTestGraspController_Initial, Strict]
+- [ZeroGrasp, OK, ZeroGrasp, Strict]
 # Initial state
-init: McTestGraspController_Initial
+init: ZeroGrasp
+
+CoMTask:
+  type: com
+  weight: 1000
+  stiffness: 30
+  com: [0.0, 0.0, 0.71]
+
+configs:
+  ZeroGrasp:
+    depth: 0.6
+    approach: 0.1
+    threshold1: 0.05
+    threshold2: 0.05
