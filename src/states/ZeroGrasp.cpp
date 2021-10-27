@@ -23,7 +23,6 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
 
   if (add_)
   {
-    mc_rtc::log::info("in the step0");
     if (hand_ == "Left")
     {
       activeTask_ = ctl.leftHandTask_; 
@@ -41,14 +40,8 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
     
     return false; 
   }
-  if (step_ == 1)
-  {
-    std::cout << "threshold1: "<< threshold1_ << std::endl;
-    std::cout << "error: "<< activeTask_->eval().norm() << std::endl;
-  }
   if (step_ == 1 && activeTask_->eval().norm() < threshold1_)
   {
-    mc_rtc::log::info("in the step1:");
     activeTask_->target(target_);
     step_ = 2;
 
@@ -56,7 +49,6 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
   }
   if (step_ == 2 && activeTask_->eval().norm() < threshold2_)
   {
-    mc_rtc::log::info("in the step2");
     output("OK");
     return true;
   }

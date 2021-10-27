@@ -70,7 +70,8 @@ hrp2_drc:
 states: {}
 # Transitions map
 transitions:
-- [ZeroGrasp, OK, ZeroGrasp, Strict]
+  - [ZeroGrasp, OK, OneGrasp, Strict]
+  - [OneGrasp, OK, OneGrasp, Strict]
 # Initial state
 init: ZeroGrasp
 
