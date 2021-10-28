@@ -26,7 +26,7 @@ private:
     std::string active_hand_ = "Left";
     std::string opposite_hand_ = "Right";
     std::string opposite_surface_ = "RightGripper";
-    sva::PTransformd opposite_pos_;
+    sva::PTransformd opposite_pose_;
     double depth_ = 0.6;
     double approachDepth_ = 0.1;
 

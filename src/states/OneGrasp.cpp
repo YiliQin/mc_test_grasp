@@ -20,13 +20,13 @@ void OneGrasp::start(mc_control::fsm::Controller & ctl_)
   {
     opposite_hand_ = "Right";
     opposite_surface_ = "RightGripper";
-    opposite_pos_ = ctl.rightHandTask_->surfacePose();
+    opposite_pose_ = ctl.rightHandTask_->surfacePose();
   }
   else if (active_hand_ == "Right")
   {
     opposite_hand_ = "Left";
     opposite_surface_ = "LeftGripper";
-    opposite_pos_ = ctl.leftHandTask_->surfacePose();
+    opposite_pose_ = ctl.leftHandTask_->surfacePose();
   }
 
 }
@@ -88,9 +88,6 @@ void OneGrasp::createGui(mc_control::fsm::Controller & ctl_)
   auto & gui = *ctl_.gui();
 
   gui.addElement({"Grasp"},
-                 //mc_rtc::gui::ComboInput("hand", {"Left", "Right"},
-                 //[this]() -> const std::string & {return hand_;},
-                 //[this](const std::string & s) { hand_ = s; }),
                  mc_rtc::gui::ArrayInput(
                  "Target position (world) [m/deg]", {"x", "y", "theta"},
                  [this]() -> const Eigen::Vector3d & { return target_pos_; },
@@ -111,7 +108,11 @@ void OneGrasp::computeTarget()
   world_to_surface_.translation() = Eigen::Vector3d::Identity();
   world_to_surface_.rotation() = sva::RotY(-M_PI/2)*sva::RotX(-M_PI/2);
   target_.translation() = Eigen::Vector3d(depth_, -target_pos_.x(), target_pos_.y());
-  target_.rotation() = sva::RotX(M_PI*target_pos_.z()/180)*world_to_surface_.rotation();
+  if (active_hand_ == "Left") 
+    target_.rotation() = world_to_surface_.rotation()*sva::RotX(M_PI*target_pos_.z()/180);
+  else if (active_hand_ == "Right")
+    target_.rotation() = world_to_surface_.rotation()*sva::RotX(M_PI*(1-target_pos_.z()/180));
+  else ;
   preTarget_ = target_;
   preTarget_.translation().x() -= approachDepth_;
 }
@@ -121,9 +122,14 @@ void OneGrasp::computeTargetRelative()
   world_to_surface_.translation() = Eigen::Vector3d::Identity();
   world_to_surface_.rotation() = sva::RotY(-M_PI/2)*sva::RotX(-M_PI/2);
   target_.translation() = Eigen::Vector3d(depth_, 
-              -target_pos_.x()+opposite_pos_.translation().y(), 
-              target_pos_.y()+opposite_pos_.translation().z());
-  target_.rotation() = sva::RotX(M_PI*target_pos_.z()/180)*world_to_surface_.rotation();
+              -target_pos_.x()+opposite_pose_.translation().y(), 
+              target_pos_.y()+opposite_pose_.translation().z());
+  //target_.rotation() = sva::RotX(M_PI*target_pos_.z()/180);
+  if (active_hand_ == "Left") 
+    target_.rotation() = opposite_pose_.rotation()*sva::RotX(M_PI*target_pos_.z()/180);
+  else if (active_hand_ == "Right")
+    target_.rotation() = opposite_pose_.rotation()*sva::RotX(M_PI*(1-target_pos_.z()/180));
+  else ;
   preTarget_ = target_;
   preTarget_.translation().x() -= approachDepth_;
 }

@@ -93,8 +93,11 @@ void ZeroGrasp::computeTarget()
   world_to_surface_.translation() = Eigen::Vector3d::Identity();
   world_to_surface_.rotation() = sva::RotY(-M_PI/2)*sva::RotX(-M_PI/2);
   target_.translation() = Eigen::Vector3d(depth_, -target_pos_.x(), target_pos_.y());
-  //target_.rotation() = sva::RotX(M_PI*target_pos_.z()/180);
-  target_.rotation() = sva::RotX(M_PI*target_pos_.z()/180)*world_to_surface_.rotation();
+  if (hand_ == "Left")
+    target_.rotation() = world_to_surface_.rotation()*sva::RotX(M_PI*target_pos_.z()/180);
+  else if (hand_ == "Right")
+    target_.rotation() = world_to_surface_.rotation()*sva::RotX(M_PI*(1-target_pos_.z()/180));
+  else ;
   preTarget_ = target_;
   preTarget_.translation().x() -= approachDepth_;
 }
