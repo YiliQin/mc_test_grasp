@@ -1,0 +1,19 @@
+RemoveLeftFromOneStep:
+  base: RemoveGrasp
+  hand: Left
+  approach: 0.1
+  threshold1: 0.02
+  threshold2: 0.02
+  
+RemoveRightFromOneStep:
+  base: RemoveGrasp
+  hand: Right
+  approach: 0.1
+  threshold1: 0.02
+  threshold2: 0.02
+  
+RemoveLeftFromTwoStep:
+  base: RemoveLeftFromOneStep
+
+RemoveRightFromTwoStep:
+  base: RemoveRightFromOneStep

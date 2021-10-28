@@ -20,13 +20,13 @@ bool TwoGrasp::run(mc_control::fsm::Controller & ctl_)
   if (remove_left_ == true)
   {
     remove_left_ = false;
-    output("RemoveLeft");
+    output("ReqRemoveLeft");
     return true;
   }
   else if (remove_right_ == true)
   {
     remove_right_ = false;
-    output("RemoveRight");
+    output("ReqRemoveRight");
     return true;
   }
 
@@ -60,4 +60,5 @@ void TwoGrasp::createGui(mc_control::fsm::Controller & ctl_)
                  //mc_rtc::gui::Transform("target", [this]() -> const sva::PTransformd & { return target_; })
                  );
 }
+
 EXPORT_SINGLE_STATE("TwoGrasp", TwoGrasp)

@@ -14,6 +14,8 @@ McTestGraspController::McTestGraspController(mc_rbdyn::RobotModulePtr rm, double
 
   rightHandTask_.reset(new mc_tasks::SurfaceTransformTask("RightGripper", robots(), robots().robotIndex(), 10.0, 1000));
 
+  left_init_pose_ = leftHandTask_->surfacePose();
+  right_init_pose_ = rightHandTask_->surfacePose();
 }
 
 bool McTestGraspController::run()

@@ -17,4 +17,5 @@ private:
     bool remove_right_ = false;
 
     void createGui(mc_control::fsm::Controller & ctl);
+
 };

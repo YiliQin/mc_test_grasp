@@ -28,6 +28,7 @@ void OneGrasp::start(mc_control::fsm::Controller & ctl_)
     opposite_surface_ = "LeftGripper";
     opposite_pose_ = ctl.leftHandTask_->surfacePose();
   }
+  else ;
 
 }
 
