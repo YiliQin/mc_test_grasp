@@ -109,9 +109,9 @@ void OneGrasp::createGui(mc_control::fsm::Controller & ctl_)
 void OneGrasp::computeTarget()
 {
   world_to_surface_.translation() = Eigen::Vector3d::Identity();
-  world_to_surface_.rotation() = sva::RotY(-M_PI/2)*sva::RotX(-M_PI/2);
+  world_to_surface_.rotation() = sva::RotY(-mc_rtc::constants::PI/2)*sva::RotX(-mc_rtc::constants::PI /2);
   target_.translation() = Eigen::Vector3d(depth_, -target_pos_.x(), target_pos_.y());
-  target_.rotation() = sva::RotX(M_PI*target_pos_.z()/180)*world_to_surface_.rotation();
+  target_.rotation() = sva::RotX(mc_rtc::constants::PI *target_pos_.z()/180)*world_to_surface_.rotation();
   preTarget_ = target_;
   preTarget_.translation().x() -= approachDepth_;
 }
@@ -119,11 +119,11 @@ void OneGrasp::computeTarget()
 void OneGrasp::computeTargetRelative()
 {
   world_to_surface_.translation() = Eigen::Vector3d::Identity();
-  world_to_surface_.rotation() = sva::RotY(-M_PI/2)*sva::RotX(-M_PI/2);
+  world_to_surface_.rotation() = sva::RotY(-mc_rtc::constants::PI /2)*sva::RotX(-mc_rtc::constants::PI /2);
   target_.translation() = Eigen::Vector3d(depth_, 
               -target_pos_.x()+opposite_pos_.translation().y(), 
               target_pos_.y()+opposite_pos_.translation().z());
-  target_.rotation() = sva::RotX(M_PI*target_pos_.z()/180)*world_to_surface_.rotation();
+  target_.rotation() = sva::RotX(mc_rtc::constants::PI *target_pos_.z()/180)*world_to_surface_.rotation();
   preTarget_ = target_;
   preTarget_.translation().x() -= approachDepth_;
 }
