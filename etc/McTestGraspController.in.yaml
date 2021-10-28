@@ -72,8 +72,10 @@ states: {}
 transitions:
   - [ZeroGraspStep, AddLeft, OneGraspRightStep, Auto]
   - [OneGraspRightStep, OK, TwoGraspStep, Auto]
+  - [TwoGraspStep, RemoveLeft, OneGraspLeftStep, Auto]
   - [ZeroGraspStep, AddRight, OneGraspLeftStep, Auto]
   - [OneGraspLeftStep, OK, TwoGraspStep, Auto]
+  - [TwoGraspStep, RemoveRight, OneGraspRightStep, Auto]
 # Initial state
 init: ZeroGrasp
 

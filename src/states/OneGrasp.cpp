@@ -78,9 +78,9 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
 void OneGrasp::teardown(mc_control::fsm::Controller & ctl_)
 {
   auto & ctl = static_cast<McTestGraspController &>(ctl_);
-  //auto & gui = *ctl_.gui();
+  auto & gui = *ctl_.gui();
 
-  //gui.removeCategory({"Grasp"});
+  gui.removeCategory({"Grasp"});
 }
 
 void OneGrasp::createGui(mc_control::fsm::Controller & ctl_)
