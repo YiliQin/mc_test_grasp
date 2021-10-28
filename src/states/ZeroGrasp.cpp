@@ -49,7 +49,11 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
   }
   if (step_ == 2 && activeTask_->eval().norm() < threshold2_)
   {
-    output("OK");
+    if (hand_ == "Left")
+      output("AddLeft");
+    else if (hand_ == "Right")
+      output("AddRight");
+    else ;
     return true;
   }
 
@@ -60,6 +64,10 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
 void ZeroGrasp::teardown(mc_control::fsm::Controller & ctl_)
 {
   auto & ctl = static_cast<McTestGraspController &>(ctl_);
+  auto & gui = *ctl_.gui();
+
+  gui.removeCategory({"Grasp"});
+
 }
 
 void ZeroGrasp::createGui(mc_control::fsm::Controller & ctl_)

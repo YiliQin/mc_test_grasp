@@ -70,8 +70,10 @@ hrp2_drc:
 states: {}
 # Transitions map
 transitions:
-  - [ZeroGrasp, OK, OneGrasp, Strict]
-  - [OneGrasp, OK, OneGrasp, Strict]
+  - [ZeroGraspStep, AddLeft, OneGraspRightStep, Auto]
+  - [OneGraspRightStep, OK, TwoGraspStep, Auto]
+  - [ZeroGraspStep, AddRight, OneGraspLeftStep, Auto]
+  - [OneGraspLeftStep, OK, TwoGraspStep, Auto]
 # Initial state
 init: ZeroGrasp
 
@@ -81,9 +83,3 @@ CoMTask:
   stiffness: 30
   com: [0.0, 0.0, 0.71]
 
-configs:
-  ZeroGrasp:
-    depth: 0.6
-    approach: 0.1
-    threshold1: 0.05
-    threshold2: 0.05

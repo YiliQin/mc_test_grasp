@@ -10,9 +10,9 @@ McTestGraspController::McTestGraspController(mc_rbdyn::RobotModulePtr rm, double
   // init tasks
   comTask = mc_tasks::MetaTaskLoader::load<mc_tasks::CoMTask>(solver(), config("CoMTask"));
 
-  leftHandTask_.reset(new mc_tasks::SurfaceTransformTask("LeftGripper", robots(), robots().robotIndex(), 2.0, 500));
+  leftHandTask_.reset(new mc_tasks::SurfaceTransformTask("LeftGripper", robots(), robots().robotIndex(), 10.0, 1000));
 
-  rightHandTask_.reset(new mc_tasks::SurfaceTransformTask("RightGripper", robots(), robots().robotIndex(), 2.0, 500));
+  rightHandTask_.reset(new mc_tasks::SurfaceTransformTask("RightGripper", robots(), robots().robotIndex(), 10.0, 1000));
 
 }
 

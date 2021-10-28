@@ -1,0 +1,8 @@
+ZeroGraspStep:
+  base: ZeroGrasp
+  depth: 0.6
+  approach: 0.1
+  threshold1: 0.01
+  threshold2: 0.01
+
+
