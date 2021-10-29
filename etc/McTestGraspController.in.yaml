@@ -90,7 +90,7 @@ CoMTask:
   type: com
   weight: 1000
   stiffness: 10.0
-  com: [0.0, 0.0, 0.71]
+  com: [0.0, 0.0, 0.85]
 
 BodyOrientationTask:
   type: orientation
@@ -103,6 +103,15 @@ ChestOrientationTask:
   body: CHEST_LINK1
   weight: 500
   stiffness: 1.0
+
+LookAtHandTask:
+  type: lookAt
+  body: azure_depth_frame
+  bodyVector: [0.0, 0.0, 0.0]
+  targetPos: [1.0, 0.0, 1.2]
+  weight: 100
+  stiffness: 1.0
+  active_joints: [HEAD_JOINT0, HEAD_JOINT1]
 
 LeftHandTask:
   type: surfaceTransform

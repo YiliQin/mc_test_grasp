@@ -16,6 +16,7 @@ void ZeroGrasp::start(mc_control::fsm::Controller & ctl_)
   
   hand_surface_pose_.translation() = Eigen::Vector3d::Identity();
   hand_surface_pose_.rotation() = sva::RotY(-mc_rtc::constants::PI /2)*sva::RotX(-mc_rtc::constants::PI /2);
+
 }
 
 bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)

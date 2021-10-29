@@ -14,6 +14,8 @@ McTestGraspController::McTestGraspController(mc_rbdyn::RobotModulePtr rm, double
   solver().addTask(bodyOrientationTask_);
   chestOrientationTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::OrientationTask>(solver(), config("ChestOrientationTask"));
   solver().addTask(chestOrientationTask_);
+  lookAtHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::LookAtTask>(solver(), config("LookAtHandTask"));
+  solver().addTask(lookAtHandTask_);
   leftHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::SurfaceTransformTask>(solver(), config("LeftHandTask"));
   solver().addTask(leftHandTask_);
   rightHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::SurfaceTransformTask>(solver(), config("RightHandTask"));
@@ -40,6 +42,9 @@ void McTestGraspController::reset(const mc_control::ControllerResetData & reset_
 
   chestOrientationTask_->reset();
   solver().addTask(chestOrientationTask_);
+
+  lookAtHandTask_->reset();
+  solver().addTask(lookAtHandTask_);
   
   leftHandTask_->reset();
   solver().addTask(leftHandTask_);

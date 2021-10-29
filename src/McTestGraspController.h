@@ -4,6 +4,7 @@
 #include <mc_control/fsm/Controller.h>
 #include <mc_tasks/CoMTask.h>
 #include <mc_tasks/OrientationTask.h>
+#include <mc_tasks/LookAtTask.h>
 #include <mc_tasks/SurfaceTransformTask.h>
 #include "api.h"
 
@@ -19,6 +20,7 @@ struct McTestGraspController_DLLAPI McTestGraspController : public mc_control::f
     std::shared_ptr<mc_tasks::CoMTask> comTask_;
     std::shared_ptr<mc_tasks::OrientationTask> bodyOrientationTask_; 
     std::shared_ptr<mc_tasks::OrientationTask> chestOrientationTask_;
+    std::shared_ptr<mc_tasks::LookAtTask> lookAtHandTask_; 
     std::shared_ptr<mc_tasks::SurfaceTransformTask> leftHandTask_;
 		std::shared_ptr<mc_tasks::SurfaceTransformTask> rightHandTask_;
     // store intial left and right hands pose
