@@ -2,7 +2,7 @@
 
 void RemoveGrasp::configure(const mc_rtc::Configuration & config)
 {
-  config("approach", approachDepth_);
+  config("approach", approach_depth_);
   config("threshold1", threshold1_);
   config("threshold2", threshold2_);
   config("hand", active_hand_);
@@ -47,7 +47,7 @@ bool RemoveGrasp::run(mc_control::fsm::Controller & ctl_)
     }                                  
     else ;                             
     ctl.solver().addTask(activeTask_); 
-    activeTask_->target(preTarget_);   
+    activeTask_->target(pre_target_);   
     step_ = 1;                         
 
     return false;
@@ -86,15 +86,15 @@ void RemoveGrasp::createGui(mc_control::fsm::Controller & ctl_)
   auto & gui = *ctl_.gui();
 
   gui.addElement({"Grasp"},
-                 mc_rtc::gui::Transform("preTarget", [this]() -> const sva::PTransformd & { return preTarget_; }),
-                 mc_rtc::gui::Transform("target", [this]() -> const sva::PTransformd & { return target_; })
+                 mc_rtc::gui::Transform("[pre_target]", [this]() -> const sva::PTransformd & { return pre_target_; }),
+                 mc_rtc::gui::Transform("[target]", [this]() -> const sva::PTransformd & { return target_; })
                  );
 }
 
 void RemoveGrasp::computePreTarget()
 {
-  preTarget_ = active_hand_pose_;
-  preTarget_.translation().x() -= approachDepth_;
+  pre_target_ = active_hand_pose_;
+  pre_target_.translation().x() -= approach_depth_;
 }
 
 EXPORT_SINGLE_STATE("RemoveGrasp", RemoveGrasp)
