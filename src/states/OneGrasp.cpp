@@ -116,7 +116,7 @@ void OneGrasp::computeTargetRelative()
               -target_relative_pos_.x()+opposite_hand_pose_.translation().y(), 
               target_relative_pos_.y()+opposite_hand_pose_.translation().z());
   if (active_hand_ == "Left") 
-    target_.rotation() = opposite_hand_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*target_relative_pos_.z()/180);
+    target_.rotation() = opposite_hand_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*(1+target_relative_pos_.z()/180));
   else if (active_hand_ == "Right")
     target_.rotation() = opposite_hand_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*(1-target_relative_pos_.z()/180));
   else ;
