@@ -46,7 +46,6 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
     }
     else ; 
 
-    ctl.solver().addTask(activeTask_);
     activeTask_->target(pre_target_);
     add_ = false;
     step_ = 1;

@@ -45,7 +45,7 @@ bool RemoveGrasp::run(mc_control::fsm::Controller & ctl_)
       activeTask_ = ctl.rightHandTask_;
     }                                  
     else ;                             
-    ctl.solver().addTask(activeTask_); 
+
     activeTask_->target(pre_target_);   
     step_ = 1;                         
 
