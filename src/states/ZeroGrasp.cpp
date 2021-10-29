@@ -6,7 +6,6 @@ void ZeroGrasp::configure(const mc_rtc::Configuration & config)
   config("approach", approach_depth_);
   config("threshold1", threshold1_);
   config("threshold2", threshold2_);
-
 }
 
 void ZeroGrasp::start(mc_control::fsm::Controller & ctl_)
@@ -15,6 +14,8 @@ void ZeroGrasp::start(mc_control::fsm::Controller & ctl_)
 
   createGui(ctl);
   
+  hand_surface_pose_.translation() = Eigen::Vector3d::Identity();
+  hand_surface_pose_.rotation() = sva::RotY(-mc_rtc::constants::PI /2)*sva::RotX(-mc_rtc::constants::PI /2);
 }
 
 bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
@@ -90,9 +91,6 @@ void ZeroGrasp::createGui(mc_control::fsm::Controller & ctl_)
 
 void ZeroGrasp::computeTarget()
 {
-  hand_surface_pose_.translation() = Eigen::Vector3d::Identity();
-  hand_surface_pose_.rotation() = sva::RotY(-mc_rtc::constants::PI /2)*sva::RotX(-mc_rtc::constants::PI /2);
-
   target_.translation() = Eigen::Vector3d(depth_, -target_pose_.x(), target_pose_.y());
   if (hand_ == "Left")
     target_.rotation() = hand_surface_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*target_pose_.z()/180);

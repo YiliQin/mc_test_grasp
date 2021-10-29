@@ -25,6 +25,7 @@ private:
     bool add_ = false;
     bool remove_ = false;
     Eigen::Vector3d target_pos_;
+    Eigen::Vector3d target_relative_pos_;
     sva::PTransformd target_;
     sva::PTransformd pre_target_;
     sva::PTransformd hand_surface_pose_;

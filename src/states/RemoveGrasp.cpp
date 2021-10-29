@@ -6,7 +6,6 @@ void RemoveGrasp::configure(const mc_rtc::Configuration & config)
   config("threshold1", threshold1_);
   config("threshold2", threshold2_);
   config("hand", active_hand_);
-
 }
 
 void RemoveGrasp::start(mc_control::fsm::Controller & ctl_)
