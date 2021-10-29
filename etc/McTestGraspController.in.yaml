@@ -70,15 +70,19 @@ hrp2_drc:
 states: {}
 # Transitions map
 transitions:
-  - [ZeroGraspStep, AddLeft, OneGraspRightStep, Auto]
-  - [OneGraspRightStep, OK, TwoGraspStep, Auto]
+  - [ZeroGraspStep, AddedLeft, OneGraspLeftHoldStep, Auto]
+  - [OneGraspLeftHoldStep, AddedHand, TwoGraspStep, Auto]
+  - [OneGraspLeftHoldStep, ReqRemove, RemoveLeftFromOneStep, Auto]
+  - [RemoveLeftFromOneStep, RemovedLeft, ZeroGraspStep, Auto]
   - [TwoGraspStep, ReqRemoveLeft, RemoveLeftFromTwoStep, Auto]
-  - [RemoveLeftFromTwoStep, RemovedLeft, OneGraspLeftStep, Auto]
+  - [RemoveLeftFromTwoStep, RemovedLeft, OneGraspRightHoldStep, Auto]
 
-  - [ZeroGraspStep, AddRight, OneGraspLeftStep, Auto]
-  - [OneGraspLeftStep, OK, TwoGraspStep, Auto]
+  - [ZeroGraspStep, AddedRight, OneGraspRightHoldStep, Auto]
+  - [OneGraspRightHoldStep, AddedHand, TwoGraspStep, Auto]
+  - [OneGraspRightHoldStep, ReqRemove, RemoveRightFromOneStep, Auto]
+  - [RemoveRightFromOneStep, RemovedRight, ZeroGraspStep, Auto]
   - [TwoGraspStep, ReqRemoveRight, RemoveRightFromTwoStep, Auto]
-  - [RemoveRightFromTwoStep, RemovedRight, OneGraspRightStep, Auto]
+  - [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
 # Initial state
 init: ZeroGrasp
 

@@ -1,18 +1,21 @@
-OneGraspLeftStep:
-  base: OneGrasp
-  depth: 0.6
+OneGraspRightHoldStep:
+  base: OneGraspStep
   hand: Left
+
+OneGraspLeftHoldStep:
+  base: OneGraspStep
+  hand: Right
+
+OneGraspStep:
+  base: OneGrasp
+  hand: Left
+  depth: 0.6
   approach: 0.1
   threshold1: 0.02
   threshold2: 0.02
 
-OneGraspRightStep:
-  base: OneGrasp
-  depth: 0.6
-  hand: Right
-  approach: 0.1
-  threshold1: 0.02
-  threshold2: 0.02
+
+
 
 
   

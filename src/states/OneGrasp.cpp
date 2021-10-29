@@ -38,7 +38,7 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
 
   if (remove_)
   {
-    output("Remove");
+    output("ReqRemove");
     return true;
   }
   if (add_)
@@ -69,7 +69,7 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
   }                                                          
   if (step_ == 2 && activeTask_->eval().norm() < threshold2_)
   {                                                          
-    output("OK");                                            
+    output("AddedHand");                                            
     return true;                                             
   }                                                          
 
@@ -94,13 +94,13 @@ void OneGrasp::createGui(mc_control::fsm::Controller & ctl_)
                  [this]() -> const Eigen::Vector3d & { return target_pos_; },
                  [this](const Eigen::Vector3d & t) { target_pos_ = t; computeTarget(); }), 
                  mc_rtc::gui::ArrayInput(
-                 "Target position (Relative to opposite) [m/deg]", {"x", "y", "theta"},
+                 "Target position (relative) [m/deg]", {"x", "y", "theta"},
                  [this]() -> const Eigen::Vector3d & { return target_pos_; },
                  [this](const Eigen::Vector3d & t) { target_pos_ = t; computeTargetRelative(); }), 
-                 mc_rtc::gui::Button("Add", [this]() {add_ = true;}),
-                 mc_rtc::gui::Button("Remove", [this]() {remove_ = true;}),
-                 mc_rtc::gui::Transform("preTarget", [this]() -> const sva::PTransformd & { return preTarget_; }),
-                 mc_rtc::gui::Transform("target", [this]() -> const sva::PTransformd & { return target_; })
+                 mc_rtc::gui::Button("Add hand", [this]() {add_ = true;}),
+                 mc_rtc::gui::Button("Remove hand", [this]() {remove_ = true;}),
+                 mc_rtc::gui::Transform("[preTarget]", [this]() -> const sva::PTransformd & { return preTarget_; }),
+                 mc_rtc::gui::Transform("[target]", [this]() -> const sva::PTransformd & { return target_; })
                  );
 }
 

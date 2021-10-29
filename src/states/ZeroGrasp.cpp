@@ -50,9 +50,9 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
   if (step_ == 2 && activeTask_->eval().norm() < threshold2_)
   {
     if (hand_ == "Left")
-      output("AddLeft");
+      output("AddedLeft");
     else if (hand_ == "Right")
-      output("AddRight");
+      output("AddedRight");
     else ;
     return true;
   }
@@ -75,16 +75,16 @@ void ZeroGrasp::createGui(mc_control::fsm::Controller & ctl_)
   auto & gui = *ctl_.gui();
 
   gui.addElement({"Grasp"},
-                 mc_rtc::gui::ComboInput("hand", {"Left", "Right"},
+                 mc_rtc::gui::ComboInput("Choose hand", {"Left", "Right"},
                  [this]() -> const std::string & {return hand_;},
                  [this](const std::string & s) { hand_ = s; }),
                  mc_rtc::gui::ArrayInput(
                  "Target position [m/deg]", {"x", "y", "theta"},
                  [this]() -> const Eigen::Vector3d & { return target_pos_; },
                  [this](const Eigen::Vector3d & t) { target_pos_ = t; computeTarget(); }), 
-                 mc_rtc::gui::Button("Add", [this]() {add_ = true;}),
-                 mc_rtc::gui::Transform("preTarget", [this]() -> const sva::PTransformd & { return preTarget_; }),
-                 mc_rtc::gui::Transform("target", [this]() -> const sva::PTransformd & { return target_; })
+                 mc_rtc::gui::Button("Add hand", [this]() {add_ = true;}),
+                 mc_rtc::gui::Transform("[preTarget]", [this]() -> const sva::PTransformd & { return preTarget_; }),
+                 mc_rtc::gui::Transform("[target]", [this]() -> const sva::PTransformd & { return target_; })
                  );
 }
 
