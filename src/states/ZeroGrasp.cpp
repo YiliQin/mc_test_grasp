@@ -6,6 +6,7 @@ void ZeroGrasp::configure(const mc_rtc::Configuration & config)
   config("approach", approach_depth_);
   config("threshold1", threshold1_);
   config("threshold2", threshold2_);
+  config("threshold3", threshold3_);
 }
 
 void ZeroGrasp::start(mc_control::fsm::Controller & ctl_)
@@ -23,7 +24,7 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
 {
   auto & ctl = static_cast<McTestGraspController &>(ctl_);
 
-  if (add_)
+  if (step_ == 0 && add_ == true)
   {
     if (hand_ == "Left")
     {
@@ -35,9 +36,9 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
     }
     else ;
 
-    activeTask_->target(pre_target_);
     add_ = false;
     step_ = 1;
+    activeTask_->target(pre_target_);
     
     return false; 
   }
@@ -45,19 +46,42 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
   {
     activeTask_->target(target_);
     step_ = 2;
-
     return false; 
   }
   if (step_ == 2 && activeTask_->eval().norm() < threshold2_)
   {
+    step_ = 10;
+    mc_rtc::log::info("ZeroGrasp added hand, add new target for [Move hand] or [Next step] to next");
+    return false;
+  }
+  if (step_ == 10 && move_ == true)
+  {
+    move_ = false;
+    step_ = 11;
+    activeTask_->target(target_);
+    mc_rtc::log::info("Added new target for [Move hand]");
+    
+    return false;
+  }
+  if (step_ == 11 && activeTask_->eval().norm() < threshold3_)
+  {
+    step_ = 10; 
+    mc_rtc::log::info("Moved to new target");
+
+    return false;
+  }
+  if (step_ == 10 && next_ == true)
+  {    
+    next_ = false;
     if (hand_ == "Left")
       output("AddedLeft");
     else if (hand_ == "Right")
       output("AddedRight");
     else ;
+
     return true;
   }
-
+  
   return false;
 
 }
@@ -84,6 +108,8 @@ void ZeroGrasp::createGui(mc_control::fsm::Controller & ctl_)
                  [this]() -> const Eigen::Vector3d & { return target_pose_; },
                  [this](const Eigen::Vector3d & t) { target_pose_ = t; computeTarget(); }), 
                  mc_rtc::gui::Button("Add hand", [this]() {add_ = true;}),
+                 mc_rtc::gui::Button("Move hand", [this]() {move_ = true;}),
+                 mc_rtc::gui::Button("Next step", [this]() {next_ = true;}),
                  mc_rtc::gui::Transform("[pre_target]", [this]() -> const sva::PTransformd & { return pre_target_; }),
                  mc_rtc::gui::Transform("[target]", [this]() -> const sva::PTransformd & { return target_; })
                  );
