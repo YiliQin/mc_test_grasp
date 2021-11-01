@@ -13,6 +13,7 @@ OneGraspStep:
   approach: 0.1
   threshold1: 0.02
   threshold2: 0.02
+  threshold3: 0.02
 
 
 
