@@ -14,7 +14,7 @@ void ZeroGrasp::start(mc_control::fsm::Controller & ctl_)
 
   createGui(ctl);
   
-  hand_surface_pose_.translation() = Eigen::Vector3d::Identity();
+  hand_surface_pose_.translation() = Eigen::Vector3d::Zero();
   hand_surface_pose_.rotation() = sva::RotY(-mc_rtc::constants::PI /2)*sva::RotX(-mc_rtc::constants::PI /2);
 
 }
@@ -67,7 +67,7 @@ void ZeroGrasp::teardown(mc_control::fsm::Controller & ctl_)
   auto & ctl = static_cast<McTestGraspController &>(ctl_);
   auto & gui = *ctl_.gui();
 
-  gui.removeCategory({"Grasp"});
+  gui.removeCategory({"ZeroGrasp"});
 
 }
 
@@ -75,7 +75,7 @@ void ZeroGrasp::createGui(mc_control::fsm::Controller & ctl_)
 {
   auto & gui = *ctl_.gui();
 
-  gui.addElement({"Grasp"},
+  gui.addElement({"ZeroGrasp"},
                  mc_rtc::gui::ComboInput("Choose hand", {"Left", "Right"},
                  [this]() -> const std::string & {return hand_;},
                  [this](const std::string & s) { hand_ = s; }),

@@ -38,7 +38,7 @@ void TwoGrasp::teardown(mc_control::fsm::Controller & ctl_)
   auto & ctl = static_cast<McTestGraspController &>(ctl_);
   auto & gui = *ctl_.gui();
 
-  gui.removeCategory({"Grasp"});
+  gui.removeCategory({"TwoGrasp"});
 
 }
 
@@ -46,7 +46,7 @@ void TwoGrasp::createGui(mc_control::fsm::Controller & ctl_)
 {
   auto & gui = *ctl_.gui();
 
-  gui.addElement({"Grasp"},
+  gui.addElement({"TwoGrasp"},
                  mc_rtc::gui::Button("Remove left hand", [this]() {remove_left_ = true;}),
                  mc_rtc::gui::Button("Remove right hand", [this]() {remove_right_ = true;})
                  );

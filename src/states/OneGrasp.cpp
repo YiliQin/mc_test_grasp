@@ -22,7 +22,7 @@ void OneGrasp::start(mc_control::fsm::Controller & ctl_)
     grasping_hand_pose_ = ctl.leftHandTask_->surfacePose();
   else ;
 
-  hand_surface_pose_.translation() = Eigen::Vector3d::Identity();
+  hand_surface_pose_.translation() = Eigen::Vector3d::Zero();
   hand_surface_pose_.rotation() = sva::RotY(-mc_rtc::constants::PI /2)*sva::RotX(-mc_rtc::constants::PI /2);
 }
 
@@ -103,14 +103,14 @@ void OneGrasp::teardown(mc_control::fsm::Controller & ctl_)
   auto & ctl = static_cast<McTestGraspController &>(ctl_);
   auto & gui = *ctl_.gui();
 
-  gui.removeCategory({"Grasp"});
+  gui.removeCategory({"OneGrasp"});
 }
 
 void OneGrasp::createGui(mc_control::fsm::Controller & ctl_)
 {
   auto & gui = *ctl_.gui();
 
-  gui.addElement({"Grasp"},
+  gui.addElement({"OneGrasp"},
                  mc_rtc::gui::ArrayInput(
                  "Target position of added hand (World) [m/deg]", {"x", "y", "theta"},
                  [this]() -> const Eigen::Vector3d & { return target_pos_; },
@@ -129,9 +129,9 @@ void OneGrasp::createGui(mc_control::fsm::Controller & ctl_)
                  mc_rtc::gui::Button("Add hand", [this]() {add_ = true;}),
                  mc_rtc::gui::Button("Remove grasping hand", [this]() {remove_ = true;}),
                  mc_rtc::gui::Button("Move grasping hand", [this]() {move_ = true;}),
+                 mc_rtc::gui::Transform("[grasping_hand_target]", [this]() -> const sva::PTransformd & { return grasping_hand_target_; }),
                  mc_rtc::gui::Transform("[pre_target]", [this]() -> const sva::PTransformd & { return pre_target_; }),
-                 mc_rtc::gui::Transform("[target]", [this]() -> const sva::PTransformd & { return target_; }),
-                 mc_rtc::gui::Transform("[grasping_hand_target]", [this]() -> const sva::PTransformd & { return grasping_hand_target_; })
+                 mc_rtc::gui::Transform("[target]", [this]() -> const sva::PTransformd & { return target_; })
                  );
 }
 

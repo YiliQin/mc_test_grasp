@@ -70,6 +70,9 @@ hrp2_drc:
 states: {}
 # Transitions map
 transitions:
+  #- [ZeroGraspStep, AddedLeft, CloseLeftGripperStep, Auto]
+  #- [CloseLeftGripperStep, OK, OneGraspLeftHoldStep, Auto]
+
   - [ZeroGraspStep, AddedLeft, OneGraspLeftHoldStep, Auto]
   - [OneGraspLeftHoldStep, AddedHand, TwoGraspStep, Auto]
   - [OneGraspLeftHoldStep, ReqRemove, RemoveLeftFromOneStep, Auto]

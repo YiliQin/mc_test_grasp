@@ -77,14 +77,14 @@ void RemoveGrasp::teardown(mc_control::fsm::Controller & ctl_)
   auto & ctl = static_cast<McTestGraspController &>(ctl_);
   auto & gui = *ctl_.gui();
 
-  gui.removeCategory({"Grasp"});
+  gui.removeCategory({"RemoveGrasp"});
 }
 
 void RemoveGrasp::createGui(mc_control::fsm::Controller & ctl_)
 {
   auto & gui = *ctl_.gui();
 
-  gui.addElement({"Grasp"},
+  gui.addElement({"RemoveGrasp"},
                  mc_rtc::gui::Transform("[pre_target]", [this]() -> const sva::PTransformd & { return pre_target_; }),
                  mc_rtc::gui::Transform("[target]", [this]() -> const sva::PTransformd & { return target_; })
                  );
