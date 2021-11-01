@@ -19,7 +19,7 @@ private:
     double approach_depth_ = 0.1;
     double threshold1_ = 0.01;
     double threshold2_ = 0.01;
-    std::string active_hand_ = "Left";
+    std::string hand_to_add_ = "Left";
 
     int step_ = 0;
     bool add_ = false;
@@ -29,7 +29,7 @@ private:
     sva::PTransformd target_;
     sva::PTransformd pre_target_;
     sva::PTransformd hand_surface_pose_;
-    sva::PTransformd opposite_hand_pose_;
+    sva::PTransformd grasping_hand_pose_;
     std::shared_ptr<mc_tasks::SurfaceTransformTask> activeTask_ = nullptr;
 
     void createGui(mc_control::fsm::Controller & ctl);

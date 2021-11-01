@@ -125,3 +125,39 @@ RightHandTask:
   weight: 1000
   stiffness: 10.0
 
+  #PostureTask:
+  #  # Robot-specific parameters can be described below
+  #  hrp2_drc:
+  #    left:
+  #      - LARM_JOINT0
+  #      - LARM_JOINT1
+  #      - LARM_JOINT2
+  #      - LARM_JOINT3
+  #      - LARM_JOINT4
+  #      - LARM_JOINT5
+  #      - LARM_JOINT6
+  #      # - LARM_JOINT7 # gripper
+  #    right:
+  #      - RARM_JOINT0
+  #      - RARM_JOINT1
+  #      - RARM_JOINT2
+  #      - RARM_JOINT3
+  #      - RARM_JOINT4
+  #      - RARM_JOINT5
+  #      - RARM_JOINT6
+  #      # - RARM_JOINT7 # gripper
+  #    target:
+  #      RARM_JOINT0: [0.502657]
+  #      RARM_JOINT1: [-0.523598775598]
+  #      RARM_JOINT2: [0.0]
+  #      RARM_JOINT3: [-1.308996939]
+  #      RARM_JOINT4: [1.57079632679]
+  #      RARM_JOINT5: [-0.785398163397]
+  #      RARM_JOINT6: [-1.57079632679]
+  #      LARM_JOINT0: [0.502657]
+  #      LARM_JOINT1: [0.523598775598] # reverse to RARM
+  #      LARM_JOINT2: [0.0]
+  #      LARM_JOINT3: [-1.308996939]
+  #      LARM_JOINT4: [-1.57079632679] # reverse to RARM
+  #      LARM_JOINT5: [0.785398163397] # reverse to RARM
+  #      LARM_JOINT6: [1.57079632679] # reverse to RARM
