@@ -91,21 +91,21 @@ init: ZeroGrasp
 
 CoMTask:
   type: com
-  weight: 1000
-  stiffness: 10.0
+  weight: 2000
+  stiffness: 30.0
   com: [0.0, 0.0, 0.85]
 
 BodyOrientationTask:
   type: orientation
   body: BODY
   weight: 500
-  stiffness: 1.0
+  stiffness: 2.0
 
 ChestOrientationTask:
   type: orientation
   body: CHEST_LINK1
   weight: 500
-  stiffness: 1.0
+  stiffness: 2.0
 
 LookAtHandTask:
   type: lookAt
