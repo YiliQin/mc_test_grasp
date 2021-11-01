@@ -23,8 +23,6 @@ private:
 
     int step_ = 0;
     bool add_ = false;
-    bool move_ = false;
-    bool next_ = false;
     std::string hand_ = "Left";
     Eigen::Vector3d target_pose_;
     sva::PTransformd target_;
