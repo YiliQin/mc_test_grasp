@@ -91,21 +91,21 @@ init: ZeroGrasp
 
 CoMTask:
   type: com
-  weight: 2000
-  stiffness: 30.0
+  weight: 1000
+  stiffness: [5.0, 5.0, 1.0]
   com: [0.0, 0.0, 0.85]
   active_joints: [Root, RLEG_JOINT0, RLEG_JOINT1, RLEG_JOINT2, RLEG_JOINT3, RLEG_JOINT4, RLEG_JOINT5, LLEG_JOINT0, LLEG_JOINT1, LLEG_JOINT2, LLEG_JOINT3, LLEG_JOINT4, LLEG_JOINT5]
 
 BodyOrientationTask:
   type: orientation
   body: BODY
-  weight: 500
+  weight: 100
   stiffness: 2.0
 
 ChestOrientationTask:
   type: orientation
   body: CHEST_LINK1
-  weight: 500
+  weight: 100
   stiffness: 2.0
 
 LookAtHandTask:
@@ -120,13 +120,13 @@ LookAtHandTask:
 LeftHandTask:
   type: surfaceTransform
   surface: LeftGripper
-  weight: 1000
+  weight: 2000
   stiffness: 10.0
 
 RightHandTask:
   type: surfaceTransform
   surface: RightGripper
-  weight: 1000
+  weight: 2000
   stiffness: 10.0
 
   #PostureTask:
