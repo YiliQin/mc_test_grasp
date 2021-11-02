@@ -73,6 +73,8 @@ transitions:
   #- [ZeroGraspStep, AddedLeft, CloseLeftGripperStep, Auto]
   #- [CloseLeftGripperStep, OK, OneGraspLeftHoldStep, Auto]
 
+  - [McTestGraspController_Initial, OK, McTestGraspController_Initial, Strict]
+
   - [ZeroGraspStep, AddedLeft, OneGraspLeftHoldStep, Auto]
   - [OneGraspLeftHoldStep, AddedHand, TwoGraspStep, Auto]
   - [OneGraspLeftHoldStep, ReqRemove, RemoveLeftFromOneStep, Auto]
@@ -87,7 +89,8 @@ transitions:
   - [TwoGraspStep, ReqRemoveRight, RemoveRightFromTwoStep, Auto]
   - [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
 # Initial state
-init: ZeroGrasp
+#init: ZeroGrasp
+init: McTestGraspController_Initial
 
 CoMTask:
   type: com
@@ -117,17 +120,71 @@ LookAtHandTask:
   stiffness: 1.0
   active_joints: [HEAD_JOINT0, HEAD_JOINT1]
 
+#LeftHandTask:
+  #type: surfaceTransform
+  #surface: LeftGripper
+  #weight: 2000
+  #stiffness: 10.0
+
+#RightHandTask:
+  #type: surfaceTransform
+  #surface: RightGripper
+  #weight: 2000
+  #stiffness: 10.0
+
 LeftHandTask:
-  type: surfaceTransform
+  type: bspline_trajectory 
   surface: LeftGripper
   weight: 2000
   stiffness: 10.0
+  duration: 10.0
+  dimWeight: [0.5, 0.5, 0.5, 1.0, 1.0, 1.0]
+  completion:
+    OR:
+      - timeElapsed: true
+  targetSurface:
+    robot: ground
+    surface: AllGround
+    translation: [0.05, -0.05, -0.025]
+    rotation: [0.0, -1.57, 0.0]
+    # control points in target surface frame
+    controlPoints:
+    [
+      [-0.25, -0.35, 0.1],
+      [-0.08, -0.13, 0.1]
+    ]
+    oriWaypoints:
+    [
+      [13.0, [0.0, -1.57, 0.0]]
+    ]
 
 RightHandTask:
-  type: surfaceTransform
-  surface: RightGripper
+  type: bspline_trajectory 
+  surface: LeftGripper
   weight: 2000
   stiffness: 10.0
+  duration: 10.0
+  dimWeight: [0.5, 0.5, 0.5, 1.0, 1.0, 1.0]
+  completion:
+    OR:
+      - timeElapsed: true
+  targetSurface:
+    robot: ground
+    surface: AllGround
+    translation: [0.05, -0.05, -0.025]
+    rotation: [0.0, -1.57, 0.0]
+    # control points in target surface frame
+    controlPoints:
+    [
+      [-0.25, -0.35, 0.1],
+      [-0.08, -0.13, 0.1]
+    ]
+    oriWaypoints:
+    [
+      [13.0, [0.0, -1.57, 0.0]]
+    ]
+
+
 
   #PostureTask:
   #  # Robot-specific parameters can be described below

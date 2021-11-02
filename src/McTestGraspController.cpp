@@ -15,14 +15,22 @@ McTestGraspController::McTestGraspController(mc_rbdyn::RobotModulePtr rm, double
   chestOrientationTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::OrientationTask>(solver(), config("ChestOrientationTask"));
   solver().addTask(chestOrientationTask_);
   lookAtHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::LookAtTask>(solver(), config("LookAtHandTask"));
-  solver().addTask(lookAtHandTask_);
-  leftHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::SurfaceTransformTask>(solver(), config("LeftHandTask"));
-  solver().addTask(leftHandTask_);
-  rightHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::SurfaceTransformTask>(solver(), config("RightHandTask"));
+  //solver().addTask(lookAtHandTask_);
+  //leftHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::SurfaceTransformTask>(solver(), config("LeftHandTask"));
+  //solver().addTask(leftHandTask_);
+  //rightHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::SurfaceTransformTask>(solver(), config("RightHandTask"));
   solver().addTask(rightHandTask_);
 
-  left_init_pose_ = leftHandTask_->surfacePose();
-  right_init_pose_ = rightHandTask_->surfacePose();
+  leftHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::BSplineTrajectoryTask>(solver(), config("LeftHandTask"));
+  //solver().addTask(leftHandTask_);
+  rightHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::BSplineTrajectoryTask>(solver(), config("RightHandTask"));
+  //solver().addTask(rightHandTask_);
+
+  // store initial poses for two hand
+  //left_init_pose_ = leftHandTask_->surfacePose();
+  //right_init_pose_ = rightHandTask_->surfacePose();
+  left_init_pose_ = robot().surfacePose("LeftGripper"); 
+  right_init_pose_ = robot().surfacePose("RightGripper"); 
 }
 
 bool McTestGraspController::run()
@@ -47,10 +55,10 @@ void McTestGraspController::reset(const mc_control::ControllerResetData & reset_
   solver().addTask(lookAtHandTask_);
   
   leftHandTask_->reset();
-  solver().addTask(leftHandTask_);
+  //solver().addTask(leftHandTask_);
 
   rightHandTask_->reset();
-  solver().addTask(rightHandTask_);
+  //solver().addTask(rightHandTask_);
 
   mc_rtc::log::success("McTestGraspController reset done ");
 }
