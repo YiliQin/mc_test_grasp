@@ -17,9 +17,9 @@ void OneGrasp::start(mc_control::fsm::Controller & ctl_)
   createGui(ctl);
 
   if (hand_to_add_ == "Left")
-    grasping_hand_pose_ = ctl.rightHandTask_->surfacePose();
+    grasping_hand_pose_ = ctl.robot().surfacePose("RightGripper");
   else if (hand_to_add_ == "Right")
-    grasping_hand_pose_ = ctl.leftHandTask_->surfacePose();
+    grasping_hand_pose_ = ctl.robot().surfacePose("LeftGripper");
   else ;
 
   hand_surface_pose_.translation() = Eigen::Vector3d::Zero();
@@ -31,9 +31,9 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
   auto & ctl = static_cast<McTestGraspController &>(ctl_);
 
   if (hand_to_add_ == "Left")
-    grasping_hand_pose_ = ctl.rightHandTask_->surfacePose();
+    grasping_hand_pose_ = ctl.robot().surfacePose("RightGripper");
   else if (hand_to_add_ == "Right")
-    grasping_hand_pose_ = ctl.leftHandTask_->surfacePose();
+    grasping_hand_pose_ = ctl.robot().surfacePose("LeftGripper");
   else ;
 
   if (remove_)
@@ -55,6 +55,7 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
     else ; 
 
     activeTask_->target(grasping_hand_target_);
+    ctl.solver().addTask(activeTask_);
     move_ = false;
     step_ = 1;
   }
@@ -77,6 +78,7 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
     else ; 
 
     activeTask_->target(pre_target_);
+    ctl.solver().addTask(activeTask_);
     add_ = false;
     step_ = 10;
 
@@ -85,6 +87,7 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
   if (step_ == 10 && activeTask_->eval().norm() < threshold2_)
   {                                                          
     activeTask_->target(target_);                            
+    ctl.solver().addTask(activeTask_);
     step_ = 11;                                               
 
     return false;                                            

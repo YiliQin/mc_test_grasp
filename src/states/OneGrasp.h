@@ -34,7 +34,7 @@ private:
     sva::PTransformd grasping_hand_target_;
     sva::PTransformd hand_surface_pose_;
     sva::PTransformd grasping_hand_pose_;
-    std::shared_ptr<mc_tasks::SurfaceTransformTask> activeTask_ = nullptr;
+    std::shared_ptr<mc_tasks::BSplineTrajectoryTask> activeTask_ = nullptr;
 
     void createGui(mc_control::fsm::Controller & ctl);
     void computeTarget();

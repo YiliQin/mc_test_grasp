@@ -23,8 +23,8 @@ private:
     int step_ = 0;
     sva::PTransformd target_;
     sva::PTransformd pre_target_;
-    sva::PTransformd active_hand_pose_;
-    std::shared_ptr<mc_tasks::SurfaceTransformTask> activeTask_ = nullptr;
+    sva::PTransformd remove_hand_pose_;
+    std::shared_ptr<mc_tasks::BSplineTrajectoryTask> activeTask_ = nullptr;
 
     void createGui(mc_control::fsm::Controller & ctl);
     void computePreTarget();

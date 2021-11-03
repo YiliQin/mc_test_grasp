@@ -22,8 +22,6 @@ struct McTestGraspController_DLLAPI McTestGraspController : public mc_control::f
     std::shared_ptr<mc_tasks::OrientationTask> bodyOrientationTask_; 
     std::shared_ptr<mc_tasks::OrientationTask> chestOrientationTask_;
     std::shared_ptr<mc_tasks::LookAtTask> lookAtHandTask_; 
-    //std::shared_ptr<mc_tasks::SurfaceTransformTask> leftHandTask_;
-		//std::shared_ptr<mc_tasks::SurfaceTransformTask> rightHandTask_;
     std::shared_ptr<mc_tasks::BSplineTrajectoryTask> leftHandTask_;
 		std::shared_ptr<mc_tasks::BSplineTrajectoryTask> rightHandTask_;
     // store intial left and right hands pose

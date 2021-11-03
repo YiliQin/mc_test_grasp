@@ -38,12 +38,14 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
     add_ = false;
     step_ = 1;
     activeTask_->target(pre_target_);
+    ctl.solver().addTask(activeTask_);
     
     return false; 
   }
   if (step_ == 1 && activeTask_->eval().norm() < threshold1_)
   {
     activeTask_->target(target_);
+    ctl.solver().addTask(activeTask_);
     step_ = 2;
     return false; 
   }

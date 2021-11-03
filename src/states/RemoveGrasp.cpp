@@ -14,12 +14,12 @@ void RemoveGrasp::start(mc_control::fsm::Controller & ctl_)
 
   if (active_hand_ == "Left")
   {
-    active_hand_pose_ = ctl.leftHandTask_->surfacePose();
+    remove_hand_pose_ = ctl.robot().surfacePose("LeftGripper");
     target_ = ctl.left_init_pose_;
   }
   else if (active_hand_ == "Right")
   {
-    active_hand_pose_ = ctl.rightHandTask_->surfacePose();
+    remove_hand_pose_ = ctl.robot().surfacePose("RightGripper");
     target_ = ctl.right_init_pose_;
   }
   else ;
@@ -47,6 +47,7 @@ bool RemoveGrasp::run(mc_control::fsm::Controller & ctl_)
     else ;                             
 
     activeTask_->target(pre_target_);   
+    ctl.solver().addTask(activeTask_);
     step_ = 1;                         
 
     return false;
@@ -54,6 +55,7 @@ bool RemoveGrasp::run(mc_control::fsm::Controller & ctl_)
   if (step_ == 1 && activeTask_->eval().norm() < threshold1_)
   {                                                          
     activeTask_->target(target_);                            
+    ctl.solver().addTask(activeTask_);
     step_ = 2;                                               
 
     return false;                                            
@@ -92,7 +94,7 @@ void RemoveGrasp::createGui(mc_control::fsm::Controller & ctl_)
 
 void RemoveGrasp::computePreTarget()
 {
-  pre_target_ = active_hand_pose_;
+  pre_target_ = remove_hand_pose_;
   pre_target_.translation().x() -= approach_depth_;
 }
 

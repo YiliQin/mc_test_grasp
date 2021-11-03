@@ -1,7 +1,7 @@
 add_fsm_state_simple(McTestGraspController_Initial)
-#add_fsm_state_simple(ZeroGrasp)
-#add_fsm_state_simple(OneGrasp)
-#add_fsm_state_simple(TwoGrasp)
-#add_fsm_state_simple(RemoveGrasp)
+add_fsm_state_simple(ZeroGrasp)
+add_fsm_state_simple(OneGrasp)
+add_fsm_state_simple(TwoGrasp)
+add_fsm_state_simple(RemoveGrasp)
 
 add_fsm_data_directory(data)
