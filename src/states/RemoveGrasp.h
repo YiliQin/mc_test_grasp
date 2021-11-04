@@ -16,8 +16,8 @@ struct RemoveGrasp : mc_control::fsm::State
 
 private:
     double approach_depth_ = 0.1;
-    double threshold1_ = 0.01;
-    double threshold2_ = 0.01;
+    //double threshold1_ = 0.01;
+    //double threshold2_ = 0.01;
     std::string active_hand_ = "Left";
 
     int step_ = 0;
