@@ -15,10 +15,12 @@ struct RemoveGrasp : mc_control::fsm::State
     void teardown(mc_control::fsm::Controller & ctl) override;
 
 private:
+    std::string active_hand_ = "Left";
     double approach_depth_ = 0.1;
+    double approach_duration_ = 8.0;
+    double reach_duration_ = 4.0;
     //double threshold1_ = 0.01;
     //double threshold2_ = 0.01;
-    std::string active_hand_ = "Left";
 
     int step_ = 0;
     sva::PTransformd target_;

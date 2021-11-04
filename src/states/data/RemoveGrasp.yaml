@@ -15,7 +15,9 @@ RemoveRightFromTwoStep:
 RemoveGraspStep:
   base: RemoveGrasp
   hand: Left
-  approach: 0.1
+  approach_depth: 0.1
+  approach_duration: 8.0
+  reach_duration: 4.0
   #threshold1: 0.02
   #threshold2: 0.02
  

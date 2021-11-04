@@ -2,8 +2,10 @@
 
 void ZeroGrasp::configure(const mc_rtc::Configuration & config)
 {
-  config("depth", depth_);
-  config("approach", approach_depth_);
+  config("plane_depth", depth_);
+  config("approach_depth", approach_depth_);
+  config("approach_duration", approach_duration_);
+  config("reach_duration", reach_duration_);
   //config("threshold1", threshold1_);
   //config("threshold2", threshold2_);
 }
@@ -28,13 +30,13 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
     if (hand_ == "Left")
     {
       ctl.solver().removeTask(ctl.leftHandTask_);
-      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", 8.0, 1000.0, 1000, target_));                    
+      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", approach_duration_, 1000.0, 1000, {}));                    
       activeTask_ = ctl.leftHandTask_; 
     }
     else if (hand_ == "Right")
     {
       ctl.solver().removeTask(ctl.rightHandTask_);
-      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", 8.0, 1000.0, 1000, target_));                    
+      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper",approach_duration_, 1000.0, 1000, {}));                    
       activeTask_ = ctl.rightHandTask_; 
     }
     else ;
@@ -44,33 +46,28 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
     activeTask_->target(pre_target_);
     ctl.solver().addTask(activeTask_);
 
-    std::cout << "1 ... " << activeTask_->currentTime() << std::endl;
-    
     return false; 
   }
   if (step_ == 1 && activeTask_->timeElapsed() == true)
   {
-    //ctl.solver().removeTask(activeTask_);
     if (hand_ == "Left")
     {
       ctl.solver().removeTask(ctl.leftHandTask_);
-      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", 4.0, 1000.0, 1000, target_));                    
+      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", reach_duration_, 1000.0, 1000, {}));                    
       activeTask_ = ctl.leftHandTask_; 
     }
     else if (hand_ == "Right")
     {
       ctl.solver().removeTask(ctl.rightHandTask_);
-      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", 4.0, 1000.0, 1000, target_));                    
+      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", reach_duration_, 1000.0, 1000, {}));                    
       activeTask_ = ctl.rightHandTask_; 
     }
 
     activeTask_->target(target_);
     ctl.solver().addTask(activeTask_);
     step_ = 2;
-    std::cout << "2 ... " << activeTask_->currentTime() << std::endl;
     return false; 
   }
-  //if (step_ == 3 && activeTask_->eval().norm() < threshold2_)
   if (step_ == 2 && activeTask_->timeElapsed() == true)
   {
     step_ = 0;
@@ -80,7 +77,6 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
       output("AddedRight");
     else ;
 
-    std::cout << "3 ... " << activeTask_->currentTime() << std::endl;
     return true;
   }
 

@@ -2,12 +2,14 @@
 
 void OneGrasp::configure(const mc_rtc::Configuration & config)
 {
-  config("depth", depth_);
-  config("approach", approach_depth_);
+  config("hand", hand_to_add_);
+  config("plane_depth", depth_);
+  config("approach_depth", approach_depth_);
+  config("approach_duration", approach_duration_);
+  config("move_duration", move_duration_);
   //config("threshold1", threshold1_);
   //config("threshold2", threshold2_);
   //config("threshold3", threshold3_);
-  config("hand", hand_to_add_);
 }
 
 void OneGrasp::start(mc_control::fsm::Controller & ctl_)
@@ -47,13 +49,13 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
     if (hand_to_add_ == "Left")
     {
       ctl.solver().removeTask(ctl.rightHandTask_);
-      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", 4.0, 1000.0, 1000, target_));
+      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", move_duration_, 1000.0, 1000, target_));
       activeTask_ = ctl.rightHandTask_;
     }
     else if (hand_to_add_ == "Right")
     {
       ctl.solver().removeTask(ctl.leftHandTask_);
-      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", 4.0, 1000.0, 1000, target_));
+      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", move_duration_, 1000.0, 1000, target_));
       activeTask_ = ctl.leftHandTask_;
     }
     else ; 
@@ -63,7 +65,6 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
     move_ = false;
     step_ = 1;
   }
-  //if (step_ == 1 && activeTask_->eval().norm() < threshold1_)
   if (step_ == 1 && activeTask_->timeElapsed() == true)
   {
     step_ = 0;
@@ -75,13 +76,13 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
     if (hand_to_add_ == "Left")
     {
       ctl.solver().removeTask(ctl.leftHandTask_);
-      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", 8.0, 1000.0, 1000, target_));
+      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", approach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.leftHandTask_;
     }
     else if (hand_to_add_ == "Right")
     {
       ctl.solver().removeTask(ctl.rightHandTask_);
-      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", 8.0, 1000.0, 1000, target_));
+      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", approach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.rightHandTask_;
     }
     else ; 
@@ -99,13 +100,13 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
     if (hand_to_add_ == "Left")
     {
       ctl.solver().removeTask(ctl.leftHandTask_);
-      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", 4.0, 1000.0, 1000, target_));
+      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", reach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.leftHandTask_;
     }
     else if (hand_to_add_ == "Right")
     {
       ctl.solver().removeTask(ctl.rightHandTask_);
-      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", 4.0, 1000.0, 1000, target_));
+      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", reach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.rightHandTask_;
     }
     else ; 
@@ -116,7 +117,6 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
 
     return false;                                            
   }                                                          
-  //if (step_ == 11 && activeTask_->eval().norm() < threshold3_)
   if (step_ == 11 && activeTask_->timeElapsed() == true)
   {                                                          
     output("AddedHand");                                            

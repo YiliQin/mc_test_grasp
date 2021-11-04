@@ -9,8 +9,11 @@ OneGraspLeftHoldStep:
 OneGraspStep:
   base: OneGrasp
   hand: Left
-  depth: 0.6
-  approach: 0.1
+  plane_depth: 0.5
+  approach_depth: 0.1
+  approach_duration: 8.0
+  reach_duration: 8.0
+  move_duration: 4.0
   #threshold1: 0.02
   #threshold2: 0.02
   #threshold3: 0.02
