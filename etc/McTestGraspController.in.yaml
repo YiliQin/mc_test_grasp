@@ -135,12 +135,11 @@ LookAtHandTask:
 LeftHandTask:
   type: bspline_trajectory 
   surface: LeftGripper
-  weight: 2000
-  #stiffness: 10.0
+  weight: 1000
   stiffness: 100.0
   duration: 10.0
   dimWeight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
-  displaySamples: 30
+  displaySamples: 20
   completion:
     OR:
       - timeElapsed: true
@@ -158,12 +157,11 @@ LeftHandTask:
 RightHandTask:
   type: bspline_trajectory 
   surface: RightGripper
-  weight: 2000
-  #stiffness: 10.0
+  weight: 1000
   stiffness: 100.0
   duration: 10.0
   dimWeight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
-  displaySamples: 30
+  displaySamples: 20
   completion:
     OR:
       - timeElapsed: true

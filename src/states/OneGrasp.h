@@ -17,9 +17,9 @@ struct OneGrasp : mc_control::fsm::State
 private:
     double depth_ = 0.6;
     double approach_depth_ = 0.1;
-    double threshold1_ = 0.01;
-    double threshold2_ = 0.01;
-    double threshold3_ = 0.01;
+    //double threshold1_ = 0.01;
+    //double threshold2_ = 0.01;
+    //double threshold3_ = 0.01;
     std::string hand_to_add_ = "Left";
 
     int step_ = 0;

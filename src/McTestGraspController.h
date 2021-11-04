@@ -5,7 +5,6 @@
 #include <mc_tasks/CoMTask.h>
 #include <mc_tasks/OrientationTask.h>
 #include <mc_tasks/LookAtTask.h>
-//#include <mc_tasks/SurfaceTransformTask.h>
 #include <mc_tasks/BSplineTrajectoryTask.h>
 #include "api.h"
 

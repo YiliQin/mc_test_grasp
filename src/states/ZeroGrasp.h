@@ -17,9 +17,8 @@ struct ZeroGrasp : mc_control::fsm::State
 private:
     double depth_ = 0.6;
     double approach_depth_ = 0.1;
-    double threshold1_ = 0.01;
-    double threshold2_ = 0.01;
-    double threshold3_ = 0.01;
+    //double threshold1_ = 0.01;
+    //double threshold2_ = 0.01;
 
     int step_ = 0;
     bool add_ = false;

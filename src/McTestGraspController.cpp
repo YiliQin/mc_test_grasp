@@ -52,10 +52,10 @@ void McTestGraspController::reset(const mc_control::ControllerResetData & reset_
   solver().addTask(lookAtHandTask_);
   
   leftHandTask_->reset();
-  //solver().addTask(leftHandTask_);
+  solver().addTask(rightHandTask_);
 
   rightHandTask_->reset();
-  //solver().addTask(rightHandTask_);
+  solver().addTask(rightHandTask_);
 
   mc_rtc::log::success("McTestGraspController reset done ");
 }
