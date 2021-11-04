@@ -120,23 +120,11 @@ LookAtHandTask:
   stiffness: 1.0
   active_joints: [HEAD_JOINT0, HEAD_JOINT1]
 
-#LeftHandTask:
-  #type: surfaceTransform
-  #surface: LeftGripper
-  #weight: 2000
-  #stiffness: 10.0
-
-#RightHandTask:
-  #type: surfaceTransform
-  #surface: RightGripper
-  #weight: 2000
-  #stiffness: 10.0
-
 LeftHandTask:
   type: bspline_trajectory 
   surface: LeftGripper
   weight: 1000
-  stiffness: 100.0
+  stiffness: 1000.0
   duration: 10.0
   dimWeight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
   displaySamples: 20
@@ -158,7 +146,7 @@ RightHandTask:
   type: bspline_trajectory 
   surface: RightGripper
   weight: 1000
-  stiffness: 100.0
+  stiffness: 1000.0
   duration: 10.0
   dimWeight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
   displaySamples: 20
