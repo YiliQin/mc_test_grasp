@@ -15,7 +15,7 @@ struct ZeroGrasp : mc_control::fsm::State
     void teardown(mc_control::fsm::Controller & ctl) override;
 
 private:
-    double depth_ = 0.6;
+    double plane_depth_ = 0.6;
     double approach_depth_ = 0.1;
     double approach_duration_ = 10.0;
     double reach_duration_ = 4.0;

@@ -3,13 +3,14 @@
 void OneGrasp::configure(const mc_rtc::Configuration & config)
 {
   config("hand", hand_to_add_);
-  config("plane_depth", depth_);
+  config("action", action_);
+  config("plane_depth", plane_depth_);
   config("approach_depth", approach_depth_);
   config("approach_duration", approach_duration_);
   config("move_duration", move_duration_);
-  //config("threshold1", threshold1_);
-  //config("threshold2", threshold2_);
-  //config("threshold3", threshold3_);
+  config("target_pose", target_pose_);
+  config("target_relative_pose", target_relative_pose_);
+  config("move_relative_pose", move_relative_pose_);
 }
 
 void OneGrasp::start(mc_control::fsm::Controller & ctl_)
@@ -26,6 +27,27 @@ void OneGrasp::start(mc_control::fsm::Controller & ctl_)
 
   hand_surface_pose_.translation() = Eigen::Vector3d::Zero();
   hand_surface_pose_.rotation() = sva::RotY(-mc_rtc::constants::PI /2)*sva::RotX(-mc_rtc::constants::PI /2);
+
+  if (ctl.auto_mode_)
+  {
+    if (action_ == "Add")
+    {
+      computeTarget();
+      add_ = true; 
+    }
+    else if (action_ == "Move")
+    {
+      computeTargetRelative();
+      move_ = true;
+    }
+    else if (action_ == "Remove")
+    {
+      computeGraspingHandMoveRelative();
+      remove_ = true;
+    }
+    else ;
+  }
+
 }
 
 bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
@@ -141,18 +163,18 @@ void OneGrasp::createGui(mc_control::fsm::Controller & ctl_)
   gui.addElement({"OneGrasp"},
                  mc_rtc::gui::ArrayInput(
                  "Target position of added hand (World) [m/deg]", {"x", "y", "theta"},
-                 [this]() -> const Eigen::Vector3d & { return target_pos_; },
-                 [this](const Eigen::Vector3d & t) { target_pos_ = t; computeTarget(); }), 
+                 [this]() -> const Eigen::Vector3d & { return target_pose_; },
+                 [this](const Eigen::Vector3d & t) { target_pose_ = t; computeTarget(); }), 
 
                  mc_rtc::gui::ArrayInput(
                  "Target position of added hand (Relative) [m/deg]", {"x", "y", "theta"},
-                 [this]() -> const Eigen::Vector3d & { return target_relative_pos_; },
-                 [this](const Eigen::Vector3d & t) { target_relative_pos_ = t; computeTargetRelative(); }), 
+                 [this]() -> const Eigen::Vector3d & { return target_relative_pose_; },
+                 [this](const Eigen::Vector3d & t) { target_relative_pose_ = t; computeTargetRelative(); }), 
 
                  mc_rtc::gui::ArrayInput(
                  "Move grasping hand (Relative) [m/deg]", {"x", "y", "theta"},
-                 [this]() -> const Eigen::Vector3d & { return move_relative_pos_; },
-                 [this](const Eigen::Vector3d & t) { move_relative_pos_ = t; computeGraspingHandMoveRelative(); }), 
+                 [this]() -> const Eigen::Vector3d & { return move_relative_pose_; },
+                 [this](const Eigen::Vector3d & t) { move_relative_pose_ = t; computeGraspingHandMoveRelative(); }), 
 
                  mc_rtc::gui::Button("Add hand", [this]() {add_ = true;}),
                  mc_rtc::gui::Button("Remove grasping hand", [this]() {remove_ = true;}),
@@ -165,11 +187,11 @@ void OneGrasp::createGui(mc_control::fsm::Controller & ctl_)
 
 void OneGrasp::computeTarget()
 {
-  target_.translation() = Eigen::Vector3d(depth_, -target_pos_.x(), target_pos_.y());
+  target_.translation() = Eigen::Vector3d(plane_depth_, -target_pose_.x(), target_pose_.y());
   if (hand_to_add_ == "Left") 
-    target_.rotation() = hand_surface_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*target_pos_.z()/180);
+    target_.rotation() = hand_surface_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*target_pose_.z()/180);
   else if (hand_to_add_ == "Right")
-    target_.rotation() = hand_surface_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*(1-target_pos_.z()/180));
+    target_.rotation() = hand_surface_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*(1-target_pose_.z()/180));
   else ;
 
   pre_target_ = target_;
@@ -178,13 +200,13 @@ void OneGrasp::computeTarget()
 
 void OneGrasp::computeTargetRelative()
 {
-  target_.translation() = Eigen::Vector3d(depth_, 
-              -target_relative_pos_.x()+grasping_hand_pose_.translation().y(), 
-              target_relative_pos_.y()+grasping_hand_pose_.translation().z());
+  target_.translation() = Eigen::Vector3d(plane_depth_, 
+              -target_relative_pose_.x()+grasping_hand_pose_.translation().y(), 
+              target_relative_pose_.y()+grasping_hand_pose_.translation().z());
   if (hand_to_add_ == "Left") 
-    target_.rotation() = grasping_hand_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*(1+target_relative_pos_.z()/180));
+    target_.rotation() = grasping_hand_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*(1+target_relative_pose_.z()/180));
   else if (hand_to_add_ == "Right")
-    target_.rotation() = grasping_hand_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*(1-target_relative_pos_.z()/180));
+    target_.rotation() = grasping_hand_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*(1-target_relative_pose_.z()/180));
   else ;
 
   pre_target_ = target_;
@@ -193,10 +215,10 @@ void OneGrasp::computeTargetRelative()
 
 void OneGrasp::computeGraspingHandMoveRelative()
 {
-  grasping_hand_target_.translation() = Eigen::Vector3d(depth_, 
-              -move_relative_pos_.x()+grasping_hand_pose_.translation().y(), 
-              move_relative_pos_.y()+grasping_hand_pose_.translation().z());
-  grasping_hand_target_.rotation() = grasping_hand_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*move_relative_pos_.z()/180);
+  grasping_hand_target_.translation() = Eigen::Vector3d(plane_depth_, 
+              -move_relative_pose_.x()+grasping_hand_pose_.translation().y(), 
+              move_relative_pose_.y()+grasping_hand_pose_.translation().z());
+  grasping_hand_target_.rotation() = grasping_hand_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*move_relative_pose_.z()/180);
 }
 
 EXPORT_SINGLE_STATE("OneGrasp", OneGrasp)

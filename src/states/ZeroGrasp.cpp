@@ -3,7 +3,7 @@
 void ZeroGrasp::configure(const mc_rtc::Configuration & config)
 {
   config("hand", hand_);
-  config("plane_depth", depth_);
+  config("plane_depth", plane_depth_);
   config("approach_depth", approach_depth_);
   config("approach_duration", approach_duration_);
   config("reach_duration", reach_duration_);
@@ -119,7 +119,7 @@ void ZeroGrasp::createGui(mc_control::fsm::Controller & ctl_)
 
 void ZeroGrasp::computeTarget()
 {
-  target_.translation() = Eigen::Vector3d(depth_, -target_pose_.x(), target_pose_.y());
+  target_.translation() = Eigen::Vector3d(plane_depth_, -target_pose_.x(), target_pose_.y());
   if (hand_ == "Left")
     target_.rotation() = hand_surface_pose_.rotation()*sva::RotX(mc_rtc::constants::PI*target_pose_.z()/180);
   else if (hand_ == "Right")

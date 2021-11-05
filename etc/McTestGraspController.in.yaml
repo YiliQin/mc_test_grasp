@@ -89,8 +89,8 @@ transitions:
   #- [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
 
   # for auto_mode = true
-  - [ZeroGrasp::Auto::AddLeft, AddedLeft, OneGraspLeftHoldStep, Auto] 
-  - [ZeroGrasp::Auto::AddRight, AddedRight, OneGraspRightHoldStep, Auto] 
+  - [ZeroGrasp::Auto::AddLeft, AddedLeft, OneGrasp::Auto::AddRight, Auto] 
+  - [OneGrasp::Auto::AddRight, AddedHand, TwoGraspStep, Auto] 
 
 # Initial state
 #init: ZeroGraspStep

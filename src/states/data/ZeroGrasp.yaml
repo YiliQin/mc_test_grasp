@@ -2,7 +2,7 @@ ZeroGrasp::Auto:
   base: ZeroGrasp
   hand: Left
   target_pose: [0.0, 1.0, 0.0]
-  plane_depth: 0.5
+  plane_depth: 0.6
   approach_depth: 0.1
   approach_duration: 8.0
   reach_duration: 4.0

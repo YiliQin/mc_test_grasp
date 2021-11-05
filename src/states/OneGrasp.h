@@ -15,23 +15,22 @@ struct OneGrasp : mc_control::fsm::State
     void teardown(mc_control::fsm::Controller & ctl) override;
 
 private:
-    double depth_ = 0.6;
+    double plane_depth_ = 0.6;
     double approach_depth_ = 0.1;
     double approach_duration_ = 10.0;
     double reach_duration_ = 4.0;
     double move_duration_ = 5.0;
-    //double threshold1_ = 0.01;
-    //double threshold2_ = 0.01;
-    //double threshold3_ = 0.01;
     std::string hand_to_add_ = "Left";
+    // {Add, Move, Remove}
+    std::string action_ = "Add";
 
     int step_ = 0;
     bool add_ = false;
     bool move_ = false;
     bool remove_ = false;
-    Eigen::Vector3d target_pos_;
-    Eigen::Vector3d target_relative_pos_;
-    Eigen::Vector3d move_relative_pos_;
+    Eigen::Vector3d target_pose_;
+    Eigen::Vector3d target_relative_pose_;
+    Eigen::Vector3d move_relative_pose_;
     sva::PTransformd target_;
     sva::PTransformd pre_target_;
     sva::PTransformd grasping_hand_target_;
