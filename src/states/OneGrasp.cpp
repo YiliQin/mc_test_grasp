@@ -2,7 +2,7 @@
 
 void OneGrasp::configure(const mc_rtc::Configuration & config)
 {
-  config("hand", hand_to_add_);
+  config("hand_to_add", hand_to_add_);
   config("action", action_);
   config("plane_depth", plane_depth_);
   config("approach_depth", approach_depth_);
@@ -35,14 +35,18 @@ void OneGrasp::start(mc_control::fsm::Controller & ctl_)
       computeTarget();
       add_ = true; 
     }
-    else if (action_ == "Move")
+    else if (action_ == "AddRelative")
     {
       computeTargetRelative();
+      add_ = true;
+    }
+    else if (action_ == "Move")
+    {
+      computeHoldHandMoveRelative();
       move_ = true;
     }
     else if (action_ == "Remove")
     {
-      computeGraspingHandMoveRelative();
       remove_ = true;
     }
     else ;
@@ -90,7 +94,14 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
   if (step_ == 1 && activeTask_->timeElapsed() == true)
   {
     step_ = 0;
-    return false;
+
+    if (ctl.auto_mode_)
+    {
+      output("MovedOK");                                            
+      return true;
+    }
+    else 
+      return false;
   }
   // add the other hand
   if (add_)
@@ -174,7 +185,7 @@ void OneGrasp::createGui(mc_control::fsm::Controller & ctl_)
                  mc_rtc::gui::ArrayInput(
                  "Move grasping hand (Relative) [m/deg]", {"x", "y", "theta"},
                  [this]() -> const Eigen::Vector3d & { return move_relative_pose_; },
-                 [this](const Eigen::Vector3d & t) { move_relative_pose_ = t; computeGraspingHandMoveRelative(); }), 
+                 [this](const Eigen::Vector3d & t) { move_relative_pose_ = t; computeHoldHandMoveRelative(); }), 
 
                  mc_rtc::gui::Button("Add hand", [this]() {add_ = true;}),
                  mc_rtc::gui::Button("Remove grasping hand", [this]() {remove_ = true;}),
@@ -213,7 +224,7 @@ void OneGrasp::computeTargetRelative()
   pre_target_.translation().x() -= approach_depth_;
 }
 
-void OneGrasp::computeGraspingHandMoveRelative()
+void OneGrasp::computeHoldHandMoveRelative()
 {
   grasping_hand_target_.translation() = Eigen::Vector3d(plane_depth_, 
               -move_relative_pose_.x()+grasping_hand_pose_.translation().y(), 

@@ -2,28 +2,57 @@ OneGrasp::Auto::AddHand:
   base: OneGrasp
   action: Add
 
+OneGrasp::Auto::AddHandRelative:
+  base: OneGrasp
+  action: AddRelative
+
+OneGrasp::Auto::MoveHand:
+  base: OneGrasp
+  action: Move
+
 OneGrasp::Auto::AddLeft:
   base: OneGrasp::Auto::AddHand
-  hand: Left
-  target_pose: [0.2, 1.0 , 0.0]
+  hand_to_add: Left
+  target_pose: [0.2, 1.0, 0.0]
   
 OneGrasp::Auto::AddRight:
   base: OneGrasp::Auto::AddHand
-  hand: Right
-  target_pose: [0.2, 1.0 , 0.0]
+  hand_to_add: Right
+  target_pose: [0.2, 1.0, 0.0]
 
+OneGrasp::Auto::AddLeftRelative:
+  base: OneGrasp::Auto::AddHandRelative
+  hand_to_add: Left
+  target_relative_pose: [-0.2, 0.0, 0.0]
+  
+OneGrasp::Auto::AddRightRelative:
+  base: OneGrasp::Auto::AddHandRelative
+  hand_to_add: Right
+  target_relative_pose: [0.2, 0.0, 0.0]
+
+OneGrasp::Auto::MoveLeft:
+  base: OneGrasp::Auto::MoveHand
+  hand_to_add: Right
+  move_relative_pose: [0.0, 0.1, 0.0]
+  
+OneGrasp::Auto::MoveRight:
+  base: OneGrasp::Auto::MoveHand
+  hand_to_add: Left
+  move_relative_pose: [0.0, 0.1, 0.0]
+
+####################################
 OneGraspRightHoldStep:
   base: OneGraspStep
-  hand: Left
+  hand_to_add: Left
 
 OneGraspLeftHoldStep:
   base: OneGraspStep
-  hand: Right
+  hand_to_add: Right
 
 OneGraspStep:
   base: OneGrasp
-  hand: Left
-  # {Add, Move, Remove}
+  hand_to_add: Left
+  # {Add, AddRelative, Move, Remove}
   action: Add
   plane_depth: 0.6
   approach_depth: 0.1

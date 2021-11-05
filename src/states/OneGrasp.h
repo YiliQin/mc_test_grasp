@@ -21,7 +21,7 @@ private:
     double reach_duration_ = 4.0;
     double move_duration_ = 5.0;
     std::string hand_to_add_ = "Left";
-    // {Add, Move, Remove}
+    // {Add, AddRelative, Move, Remove}
     std::string action_ = "Add";
 
     int step_ = 0;
@@ -41,6 +41,6 @@ private:
     void createGui(mc_control::fsm::Controller & ctl);
     void computeTarget();
     void computeTargetRelative();
-    void computeGraspingHandMoveRelative();
+    void computeHoldHandMoveRelative();
 
 };
