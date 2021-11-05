@@ -70,10 +70,8 @@ hrp2_drc:
 states: {}
 # Transitions map
 transitions:
-  # for auto_mode = false, manual mode
+  # manual mode
   #- [ZeroGraspStep, AddedLeft, CloseLeftGripperStep, Auto]
-  #- [CloseLeftGripperStep, OK, OneGraspLeftHoldStep, Auto]
-
   - [ZeroGraspStep, AddedLeft, OneGraspLeftHoldStep, Auto]
   - [OneGraspLeftHoldStep, AddedHand, TwoGraspStep, Auto]
   - [OneGraspLeftHoldStep, ReqRemove, RemoveLeftFromOneStep, Auto]
@@ -88,18 +86,20 @@ transitions:
   - [TwoGraspStep, ReqRemoveRight, RemoveRightFromTwoStep, Auto]
   - [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
 
-  # for auto_mode = true
-  - [ZeroGrasp::Auto::AddLeft, AddedLeft, OneGrasp::Auto::MoveLeft, Auto] 
-  - [OneGrasp::Auto::MoveLeft, MovedOK, OneGrasp::Auto::AddRightRelative, Auto] 
-  - [OneGrasp::Auto::AddRightRelative, AddedHand, TwoGrasp::Auto::ReqRemoveLeft, Auto] 
-  - [TwoGrasp::Auto::ReqRemoveLeft, ReqRemoveLeft, TwoGrasp::Auto::RemoveLeft, Auto] 
-  - [TwoGrasp::Auto::RemoveLeft, RemovedLeft, OneGrasp::Auto::RemoveRight, Auto] 
-  - [OneGrasp::Auto::RemoveRight, RemovedRight, ZeroGrasp::Auto::AddRight, Auto] 
-  - [ZeroGrasp::Auto::AddRight, AddedRight, OneGrasp::Auto::AddLeft, Auto] 
+  # auto mode
+  - [ZeroGrasp::AddLeft, AddedLeft, OneGrasp::MoveLeft, Auto] 
+  - [OneGrasp::MoveLeft, MovedOK, OneGrasp::AddRightRelative, Auto] 
+  - [OneGrasp::AddRightRelative, AddedHand, TwoGrasp::ReqRemoveLeft, Auto] 
+  - [TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, TwoGrasp::RemoveLeft, Auto] 
+  - [TwoGrasp::RemoveLeft, RemovedLeft, OneGrasp::RemoveRight, Auto] 
+  - [OneGrasp::RemoveRight, RemovedRight, ZeroGrasp::AddRight, Auto] 
+  - [ZeroGrasp::AddRight, AddedRight, OneGrasp::AddLeft, Auto] 
 
 # Initial state
-#init: ZeroGraspStep
-init: ZeroGrasp::Auto::AddLeft
+## manual mode
+init: ZeroGraspStep
+## auto mode
+#init: ZeroGrasp::AddLeft
 
 
 CoMTask:
@@ -174,5 +174,5 @@ RightHandTask:
   [
   ]
 
-#
-auto_mode: true
+# auto mode or manual mode
+auto_mode: false

@@ -1,29 +1,26 @@
-# auto mode
-TwoGrasp::Auto::RemoveLeft:
-  base: RemoveGraspStep
+TwoGrasp::RemoveLeft:
+  base: RemoveLeftFromTwoStep
   hand: Left
 
-TwoGrasp::Auto::RemoveRight:
-  base: RemoveGraspStep
+TwoGrasp::RemoveRight:
+  base: RemoveRightFromTwoStep
   hand: Right
 
 ####################################
-# manual mode
 RemoveLeftFromOneStep:
   base: RemoveGraspStep
   hand: Left
- 
+
 RemoveRightFromOneStep:
   base: RemoveGraspStep
   hand: Right
- 
+
 RemoveLeftFromTwoStep:
   base: RemoveLeftFromOneStep
 
 RemoveRightFromTwoStep:
   base: RemoveRightFromOneStep
 
-####################################
 RemoveGraspStep:
   base: RemoveGrasp
   hand: Left

@@ -1,14 +1,13 @@
-# auto mode
-TwoGrasp::Auto::ReqRemoveHand:
+TwoGrasp::ReqRemoveHand:
   base: TwoGraspStep
   action: Remove
 
-TwoGrasp::Auto::ReqRemoveLeft:
-  base: TwoGrasp::Auto::ReqRemoveHand
+TwoGrasp::ReqRemoveLeft:
+  base: TwoGrasp::ReqRemoveHand
   hand_to_remove: Left
 
-TwoGrasp::Auto::ReqRemoveRight:
-  base: TwoGrasp::Auto::ReqRemoveHand
+TwoGrasp::ReqRemoveRight:
+  base: TwoGrasp::ReqRemoveHand
   hand_to_remove: Right
 
 #################################################

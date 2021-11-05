@@ -1,70 +1,64 @@
-# auto mode
-OneGrasp::Auto::AddHand:
+OneGrasp::AddHand:
   base: OneGraspStep
   action: Add
 
-OneGrasp::Auto::AddLeft:
-  base: OneGrasp::Auto::AddHand
+OneGrasp::AddLeft:
+  base: OneGrasp::AddHand
   hand_to_add: Left
   target_pose: [-0.2, 1.0, 0.0]
   
-OneGrasp::Auto::AddRight:
-  base: OneGrasp::Auto::AddHand
+OneGrasp::AddRight:
+  base: OneGrasp::AddHand
   hand_to_add: Right
   target_pose: [0.2, 1.0, 0.0]
 
-OneGrasp::Auto::AddHandRelative:
+OneGrasp::AddHandRelative:
   base: OneGraspStep
   action: AddRelative
 
-OneGrasp::Auto::AddLeftRelative:
-  base: OneGrasp::Auto::AddHandRelative
+OneGrasp::AddLeftRelative:
+  base: OneGrasp::AddHandRelative
   hand_to_add: Left
   target_relative_pose: [-0.2, 0.0, 0.0]
   
-OneGrasp::Auto::AddRightRelative:
-  base: OneGrasp::Auto::AddHandRelative
+OneGrasp::AddRightRelative:
+  base: OneGrasp::AddHandRelative
   hand_to_add: Right
   target_relative_pose: [0.2, 0.0, 0.0]
 
-OneGrasp::Auto::MoveHand:
+OneGrasp::MoveHand:
   base: OneGraspStep
   action: Move
 
-OneGrasp::Auto::MoveLeft:
-  base: OneGrasp::Auto::MoveHand
+OneGrasp::MoveLeft:
+  base: OneGrasp::MoveHand
   hand_to_add: Right
   move_relative_pose: [0.0, 0.1, 0.0]
   
-OneGrasp::Auto::MoveRight:
-  base: OneGrasp::Auto::MoveHand
+OneGrasp::MoveRight:
+  base: OneGrasp::MoveHand
   hand_to_add: Left
   move_relative_pose: [0.0, 0.1, 0.0]
 
-OneGrasp::Auto::RemoveHand:
+OneGrasp::RemoveHand:
   base: RemoveGraspStep
   action: Remove
 
-OneGrasp::Auto::RemoveLeft:
-  base: RemoveGraspStep
-  hand: Left
+OneGrasp::RemoveLeft:
+  base: RemoveLeftFromOneStep
 
-OneGrasp::Auto::RemoveRight:
-  base: RemoveGraspStep
-  hand: Right
+OneGrasp::RemoveRight:
+  base: RemoveRightFromOneStep
 
 ####################################
-# manual mode
+OneGraspLeftHoldStep:
+  base: OneGraspStep
+  hand_to_add: Right
 
 OneGraspRightHoldStep:
   base: OneGraspStep
   hand_to_add: Left
 
-OneGraspLeftHoldStep:
-  base: OneGraspStep
-  hand_to_add: Right
-
-####################################
 OneGraspStep:
   base: OneGrasp
   hand_to_add: Left

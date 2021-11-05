@@ -1,14 +1,13 @@
-# auto mode
-ZeroGrasp::Auto::AddHand:
+ZeroGrasp::AddHand:
   base: ZeroGraspStep
 
-ZeroGrasp::Auto::AddLeft:
-  base: ZeroGrasp::Auto::AddHand
+ZeroGrasp::AddLeft:
+  base: ZeroGrasp::AddHand
   hand: Left
   target_pose: [-0.2, 1.0, 0.0]
 
-ZeroGrasp::Auto::AddRight:
-  base: ZeroGrasp::Auto::AddHand
+ZeroGrasp::AddRight:
+  base: ZeroGrasp::AddHand
   hand: Right
   target_pose: [0.2, 1.0, 0.0]
 
