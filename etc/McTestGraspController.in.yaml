@@ -70,27 +70,32 @@ hrp2_drc:
 states: {}
 # Transitions map
 transitions:
+  # for auto_mode = false, manual mode
   #- [ZeroGraspStep, AddedLeft, CloseLeftGripperStep, Auto]
   #- [CloseLeftGripperStep, OK, OneGraspLeftHoldStep, Auto]
 
-  #- [McTestGraspController_Initial, OK, McTestGraspController_Initial, Strict]
+  #- [ZeroGraspStep, AddedLeft, OneGraspLeftHoldStep, Auto]
+  #- [OneGraspLeftHoldStep, AddedHand, TwoGraspStep, Auto]
+  #- [OneGraspLeftHoldStep, ReqRemove, RemoveLeftFromOneStep, Auto]
+  #- [RemoveLeftFromOneStep, RemovedLeft, ZeroGraspStep, Auto]
+  #- [TwoGraspStep, ReqRemoveLeft, RemoveLeftFromTwoStep, Auto]
+  #- [RemoveLeftFromTwoStep, RemovedLeft, OneGraspRightHoldStep, Auto]
 
-  - [ZeroGraspStep, AddedLeft, OneGraspLeftHoldStep, Auto]
-  - [OneGraspLeftHoldStep, AddedHand, TwoGraspStep, Auto]
-  - [OneGraspLeftHoldStep, ReqRemove, RemoveLeftFromOneStep, Auto]
-  - [RemoveLeftFromOneStep, RemovedLeft, ZeroGraspStep, Auto]
-  - [TwoGraspStep, ReqRemoveLeft, RemoveLeftFromTwoStep, Auto]
-  - [RemoveLeftFromTwoStep, RemovedLeft, OneGraspRightHoldStep, Auto]
+  #- [ZeroGraspStep, AddedRight, OneGraspRightHoldStep, Auto]
+  #- [OneGraspRightHoldStep, AddedHand, TwoGraspStep, Auto]
+  #- [OneGraspRightHoldStep, ReqRemove, RemoveRightFromOneStep, Auto]
+  #- [RemoveRightFromOneStep, RemovedRight, ZeroGraspStep, Auto]
+  #- [TwoGraspStep, ReqRemoveRight, RemoveRightFromTwoStep, Auto]
+  #- [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
 
-  - [ZeroGraspStep, AddedRight, OneGraspRightHoldStep, Auto]
-  - [OneGraspRightHoldStep, AddedHand, TwoGraspStep, Auto]
-  - [OneGraspRightHoldStep, ReqRemove, RemoveRightFromOneStep, Auto]
-  - [RemoveRightFromOneStep, RemovedRight, ZeroGraspStep, Auto]
-  - [TwoGraspStep, ReqRemoveRight, RemoveRightFromTwoStep, Auto]
-  - [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
+  # for auto_mode = true
+  - [ZeroGrasp::Auto::AddLeft, AddedLeft, OneGraspLeftHoldStep, Auto] 
+  - [ZeroGrasp::Auto::AddRight, AddedRight, OneGraspRightHoldStep, Auto] 
+
 # Initial state
-init: ZeroGrasp
-#init: McTestGraspController_Initial
+#init: ZeroGraspStep
+init: ZeroGrasp::Auto::AddRight
+
 
 CoMTask:
   type: com
@@ -164,39 +169,5 @@ RightHandTask:
   [
   ]
 
-  #PostureTask:
-  #  # Robot-specific parameters can be described below
-  #  hrp2_drc:
-  #    left:
-  #      - LARM_JOINT0
-  #      - LARM_JOINT1
-  #      - LARM_JOINT2
-  #      - LARM_JOINT3
-  #      - LARM_JOINT4
-  #      - LARM_JOINT5
-  #      - LARM_JOINT6
-  #      # - LARM_JOINT7 # gripper
-  #    right:
-  #      - RARM_JOINT0
-  #      - RARM_JOINT1
-  #      - RARM_JOINT2
-  #      - RARM_JOINT3
-  #      - RARM_JOINT4
-  #      - RARM_JOINT5
-  #      - RARM_JOINT6
-  #      # - RARM_JOINT7 # gripper
-  #    target:
-  #      RARM_JOINT0: [0.502657]
-  #      RARM_JOINT1: [-0.523598775598]
-  #      RARM_JOINT2: [0.0]
-  #      RARM_JOINT3: [-1.308996939]
-  #      RARM_JOINT4: [1.57079632679]
-  #      RARM_JOINT5: [-0.785398163397]
-  #      RARM_JOINT6: [-1.57079632679]
-  #      LARM_JOINT0: [0.502657]
-  #      LARM_JOINT1: [0.523598775598] # reverse to RARM
-  #      LARM_JOINT2: [0.0]
-  #      LARM_JOINT3: [-1.308996939]
-  #      LARM_JOINT4: [-1.57079632679] # reverse to RARM
-  #      LARM_JOINT5: [0.785398163397] # reverse to RARM
-  #      LARM_JOINT6: [1.57079632679] # reverse to RARM
+#
+auto_mode: true

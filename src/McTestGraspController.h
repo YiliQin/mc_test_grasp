@@ -26,6 +26,8 @@ struct McTestGraspController_DLLAPI McTestGraspController : public mc_control::f
     // store intial left and right hands pose
     sva::PTransformd left_init_pose_;
     sva::PTransformd right_init_pose_;
+    //
+    bool auto_mode_ = false;
 
 private:
     mc_rtc::Configuration config_;

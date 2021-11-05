@@ -5,7 +5,7 @@ McTestGraspController::McTestGraspController(mc_rbdyn::RobotModulePtr rm, double
 : mc_control::fsm::Controller(rm, dt, config)
 {
 
-  mc_rtc::log::success("McTestGraspController init done ");
+  config("auto_mode", auto_mode_);
 
   // init tasks
   comTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::CoMTask>(solver(), config("CoMTask"));
@@ -28,6 +28,7 @@ McTestGraspController::McTestGraspController(mc_rbdyn::RobotModulePtr rm, double
   rightHandTask_->target(right_init_pose_);
   solver().addTask(rightHandTask_);
 
+  mc_rtc::log::success("McTestGraspController init done ");
 }
 
 bool McTestGraspController::run()

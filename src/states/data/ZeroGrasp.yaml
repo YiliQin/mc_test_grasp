@@ -1,10 +1,22 @@
-ZeroGraspStep:
+ZeroGrasp::Auto:
   base: ZeroGrasp
+  hand: Left
+  target_pose: [0.0, 1.0, 0.0]
   plane_depth: 0.5
   approach_depth: 0.1
   approach_duration: 8.0
   reach_duration: 4.0
-  #threshold1: 0.02
-  #threshold2: 0.02
 
+ZeroGrasp::Auto::AddLeft:
+  base: ZeroGrasp::Auto
+  hand: Left
+  target_pose: [-0.2, 1.0, 0.0]
+
+ZeroGrasp::Auto::AddRight:
+  base: ZeroGrasp::Auto
+  hand: Right
+  target_pose: [0.2, 1.0, 0.0]
+
+ZeroGraspStep:
+  base: ZeroGrasp
 
