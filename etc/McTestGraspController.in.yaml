@@ -92,8 +92,10 @@ transitions:
   - [ZeroGrasp::Auto::AddLeft, AddedLeft, OneGrasp::Auto::MoveLeft, Auto] 
   - [OneGrasp::Auto::MoveLeft, MovedOK, OneGrasp::Auto::AddRightRelative, Auto] 
   - [OneGrasp::Auto::AddRightRelative, AddedHand, TwoGrasp::Auto::ReqRemoveLeft, Auto] 
-  - [TwoGrasp::Auto::ReqRemoveLeft, ReqRemoveLeft, OneGrasp::Auto::RemoveLeft, Auto] 
-  - [OneGrasp::Auto::RemoveLeft, RemovedLeft, OneGrasp::Auto::RemoveRight, Auto] 
+  - [TwoGrasp::Auto::ReqRemoveLeft, ReqRemoveLeft, TwoGrasp::Auto::RemoveLeft, Auto] 
+  - [TwoGrasp::Auto::RemoveLeft, RemovedLeft, OneGrasp::Auto::RemoveRight, Auto] 
+  - [OneGrasp::Auto::RemoveRight, RemovedRight, ZeroGrasp::Auto::AddRight, Auto] 
+  - [ZeroGrasp::Auto::AddRight, AddedRight, OneGrasp::Auto::AddLeft, Auto] 
 
 # Initial state
 #init: ZeroGraspStep

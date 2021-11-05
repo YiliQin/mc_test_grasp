@@ -1,29 +1,21 @@
-# auto_mode
+# auto mode
 OneGrasp::Auto::AddHand:
-  base: OneGrasp
+  base: OneGraspStep
   action: Add
-
-OneGrasp::Auto::AddHandRelative:
-  base: OneGrasp
-  action: AddRelative
-
-OneGrasp::Auto::MoveHand:
-  base: OneGrasp
-  action: Move
-
-OneGrasp::Auto::RemoveHand:
-  base: RemoveGrasp
-  action: Remove
 
 OneGrasp::Auto::AddLeft:
   base: OneGrasp::Auto::AddHand
   hand_to_add: Left
-  target_pose: [0.2, 1.0, 0.0]
+  target_pose: [-0.2, 1.0, 0.0]
   
 OneGrasp::Auto::AddRight:
   base: OneGrasp::Auto::AddHand
   hand_to_add: Right
   target_pose: [0.2, 1.0, 0.0]
+
+OneGrasp::Auto::AddHandRelative:
+  base: OneGraspStep
+  action: AddRelative
 
 OneGrasp::Auto::AddLeftRelative:
   base: OneGrasp::Auto::AddHandRelative
@@ -35,6 +27,10 @@ OneGrasp::Auto::AddRightRelative:
   hand_to_add: Right
   target_relative_pose: [0.2, 0.0, 0.0]
 
+OneGrasp::Auto::MoveHand:
+  base: OneGraspStep
+  action: Move
+
 OneGrasp::Auto::MoveLeft:
   base: OneGrasp::Auto::MoveHand
   hand_to_add: Right
@@ -45,16 +41,17 @@ OneGrasp::Auto::MoveRight:
   hand_to_add: Left
   move_relative_pose: [0.0, 0.1, 0.0]
 
-OneGrasp::Auto::RemoveLeft:
-  base: RemoveGrasp
+OneGrasp::Auto::RemoveHand:
+  base: RemoveGraspStep
   action: Remove
+
+OneGrasp::Auto::RemoveLeft:
+  base: RemoveGraspStep
   hand: Left
 
 OneGrasp::Auto::RemoveRight:
-  base: RemoveGrasp
-  action: Remove
+  base: RemoveGraspStep
   hand: Right
-
 
 ####################################
 # manual mode
@@ -67,6 +64,7 @@ OneGraspLeftHoldStep:
   base: OneGraspStep
   hand_to_add: Right
 
+####################################
 OneGraspStep:
   base: OneGrasp
   hand_to_add: Left

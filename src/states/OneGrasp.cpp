@@ -127,7 +127,6 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
 
     return false;
   }
-  //if (step_ == 10 && activeTask_->eval().norm() < threshold2_)
   if (step_ == 10 && activeTask_->timeElapsed() == true)
   {                                                          
     if (hand_to_add_ == "Left")

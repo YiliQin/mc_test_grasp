@@ -1,4 +1,19 @@
-ZeroGrasp::Auto:
+# auto mode
+ZeroGrasp::Auto::AddHand:
+  base: ZeroGraspStep
+
+ZeroGrasp::Auto::AddLeft:
+  base: ZeroGrasp::Auto::AddHand
+  hand: Left
+  target_pose: [-0.2, 1.0, 0.0]
+
+ZeroGrasp::Auto::AddRight:
+  base: ZeroGrasp::Auto::AddHand
+  hand: Right
+  target_pose: [0.2, 1.0, 0.0]
+
+########################################
+ZeroGraspStep:
   base: ZeroGrasp
   hand: Left
   target_pose: [0.0, 1.0, 0.0]
@@ -7,16 +22,4 @@ ZeroGrasp::Auto:
   approach_duration: 8.0
   reach_duration: 4.0
 
-ZeroGrasp::Auto::AddLeft:
-  base: ZeroGrasp::Auto
-  hand: Left
-  target_pose: [-0.2, 1.0, 0.0]
-
-ZeroGrasp::Auto::AddRight:
-  base: ZeroGrasp::Auto
-  hand: Right
-  target_pose: [0.2, 1.0, 0.0]
-
-ZeroGraspStep:
-  base: ZeroGrasp
 
