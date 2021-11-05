@@ -1,2 +1,18 @@
+TwoGrasp::Auto::ReqRemoveHand:
+  base: TwoGrasp
+  action: Remove
+
+TwoGrasp::Auto::ReqRemoveLeft:
+  base: TwoGrasp::Auto::ReqRemoveHand
+  hand_to_remove: Left
+
+TwoGrasp::Auto::ReqRemoveRight:
+  base: TwoGrasp::Auto::ReqRemoveHand
+  hand_to_remove: Right
+
 TwoGraspStep:
   base: TwoGrasp
+  # {Move, Remove}
+  action: Move 
+  target_relative: [0.0, 0.0, 0.0]
+  hand_to_remove: Left

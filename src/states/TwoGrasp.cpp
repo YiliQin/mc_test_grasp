@@ -4,6 +4,9 @@
 
 void TwoGrasp::configure(const mc_rtc::Configuration & config)
 {
+  config("hand_to_remove", hand_to_remove_);
+  config("action", action_);
+  config("target_relative", target_relative_);
 }
 
 void TwoGrasp::start(mc_control::fsm::Controller & ctl_)
@@ -11,6 +14,11 @@ void TwoGrasp::start(mc_control::fsm::Controller & ctl_)
   auto & ctl = static_cast<McTestGraspController &>(ctl_);
 
   createGui(ctl);
+  
+  if (ctl.auto_mode_ == true && action_ == "Remove" && hand_to_remove_ == "Left")
+    remove_left_ = true;
+  if (ctl.auto_mode_ == true && action_ == "Remove" && hand_to_remove_ == "Right")
+    remove_right_ = true; 
 }
 
 bool TwoGrasp::run(mc_control::fsm::Controller & ctl_)

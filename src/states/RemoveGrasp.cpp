@@ -6,8 +6,6 @@ void RemoveGrasp::configure(const mc_rtc::Configuration & config)
   config("approach_depth", approach_depth_);
   config("appraoch_duration", approach_duration_);
   config("reach_duration", reach_duration_);
-  //config("threshold1", threshold1_);
-  //config("threshold2", threshold2_);
 }
 
 void RemoveGrasp::start(mc_control::fsm::Controller & ctl_)

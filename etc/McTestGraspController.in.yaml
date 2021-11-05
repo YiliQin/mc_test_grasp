@@ -74,28 +74,30 @@ transitions:
   #- [ZeroGraspStep, AddedLeft, CloseLeftGripperStep, Auto]
   #- [CloseLeftGripperStep, OK, OneGraspLeftHoldStep, Auto]
 
-  #- [ZeroGraspStep, AddedLeft, OneGraspLeftHoldStep, Auto]
-  #- [OneGraspLeftHoldStep, AddedHand, TwoGraspStep, Auto]
-  #- [OneGraspLeftHoldStep, ReqRemove, RemoveLeftFromOneStep, Auto]
-  #- [RemoveLeftFromOneStep, RemovedLeft, ZeroGraspStep, Auto]
-  #- [TwoGraspStep, ReqRemoveLeft, RemoveLeftFromTwoStep, Auto]
-  #- [RemoveLeftFromTwoStep, RemovedLeft, OneGraspRightHoldStep, Auto]
+  - [ZeroGraspStep, AddedLeft, OneGraspLeftHoldStep, Auto]
+  - [OneGraspLeftHoldStep, AddedHand, TwoGraspStep, Auto]
+  - [OneGraspLeftHoldStep, ReqRemove, RemoveLeftFromOneStep, Auto]
+  - [RemoveLeftFromOneStep, RemovedLeft, ZeroGraspStep, Auto]
+  - [TwoGraspStep, ReqRemoveLeft, RemoveLeftFromTwoStep, Auto]
+  - [RemoveLeftFromTwoStep, RemovedLeft, OneGraspRightHoldStep, Auto]
 
-  #- [ZeroGraspStep, AddedRight, OneGraspRightHoldStep, Auto]
-  #- [OneGraspRightHoldStep, AddedHand, TwoGraspStep, Auto]
-  #- [OneGraspRightHoldStep, ReqRemove, RemoveRightFromOneStep, Auto]
-  #- [RemoveRightFromOneStep, RemovedRight, ZeroGraspStep, Auto]
-  #- [TwoGraspStep, ReqRemoveRight, RemoveRightFromTwoStep, Auto]
-  #- [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
+  - [ZeroGraspStep, AddedRight, OneGraspRightHoldStep, Auto]
+  - [OneGraspRightHoldStep, AddedHand, TwoGraspStep, Auto]
+  - [OneGraspRightHoldStep, ReqRemove, RemoveRightFromOneStep, Auto]
+  - [RemoveRightFromOneStep, RemovedRight, ZeroGraspStep, Auto]
+  - [TwoGraspStep, ReqRemoveRight, RemoveRightFromTwoStep, Auto]
+  - [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
 
   # for auto_mode = true
   - [ZeroGrasp::Auto::AddLeft, AddedLeft, OneGrasp::Auto::MoveLeft, Auto] 
   - [OneGrasp::Auto::MoveLeft, MovedOK, OneGrasp::Auto::AddRightRelative, Auto] 
-  - [OneGrasp::Auto::AddRightRelative, AddedHand, TwoGraspStep, Auto] 
+  - [OneGrasp::Auto::AddRightRelative, AddedHand, TwoGrasp::Auto::ReqRemoveLeft, Auto] 
+  - [TwoGrasp::Auto::ReqRemoveLeft, ReqRemoveLeft, OneGrasp::Auto::RemoveLeft, Auto] 
+  - [OneGrasp::Auto::RemoveLeft, RemovedLeft, OneGrasp::Auto::RemoveRight, Auto] 
 
 # Initial state
 #init: ZeroGraspStep
-init: ZeroGrasp::Auto::AddRight
+init: ZeroGrasp::Auto::AddLeft
 
 
 CoMTask:
