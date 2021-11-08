@@ -10,6 +10,14 @@ TwoGrasp::ReqRemoveRight:
   base: TwoGrasp::ReqRemoveHand
   hand_to_remove: Right
 
+TwoGrasp::RemoveLeft:
+  base: RemoveLeftFromTwoStep
+  hand: Left
+
+TwoGrasp::RemoveRight:
+  base: RemoveRightFromTwoStep
+  hand: Right
+
 #################################################
 TwoGraspStep:
   base: TwoGrasp

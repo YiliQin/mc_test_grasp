@@ -66,8 +66,10 @@ hrp2_drc:
   ff:
     stiffness: 2
     weight: 100
+
 # Implement some additional text states
 states: {}
+
 # Transitions map
 transitions:
   # manual mode
@@ -95,12 +97,34 @@ transitions:
   - [OneGrasp::RemoveRight, RemovedRight, ZeroGrasp::AddRight, Auto] 
   - [ZeroGrasp::AddRight, AddedRight, OneGrasp::AddLeft, Auto] 
 
+  - [S0::ZeroGrasp::AddRight, AddedRight, S1::CloseRightGripper, Strict] 
+  - [S1::CloseRightGripper, OK, S2::OneGrasp::MoveRight, Auto] 
+    # theta = 90
+  - [S2::OneGrasp::MoveRight, MovedOK, S3::OneGrasp::AddLeftRelative, Auto] 
+  - [S3::OneGrasp::AddLeftRelative, AddedHand, S4::CloseLeftGripper, Auto] 
+  - [S4::CloseLeftGripper, OK, S5::OpenLeftGripper, Strict] 
+  - [S5::OpenLeftGripper, OK, S6::TwoGrasp::ReqRemoveLeft, Auto] 
+  - [S6::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S7::TwoGrasp::RemoveLeft, Auto] 
+  - [S7::TwoGrasp::RemoveLeft, RemovedLeft, S8::OneGrasp::MoveRight, Auto] 
+    # theta = 45
+  - [S8::OneGrasp::MoveRight, MovedOK, S9::OneGrasp::AddLeftRelative, Auto] 
+  - [S9::OneGrasp::AddLeftRelative, AddedHand, S10::CloseLeftGripper, Auto] 
+  - [S10::CloseLeftGripper, OK, S11::OpenLeftGripper, Strict] 
+  - [S11::OpenLeftGripper, OK, S12::TwoGrasp::ReqRemoveLeft, Auto] 
+  - [S12::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S13::TwoGrasp::RemoveLeft, Auto] 
+    # manual open gripper and finish
+  - [S13::TwoGrasp::RemoveLeft, RemovedLeft, S14::OneGrasp::RemoveRight, Strict] 
+ 
+
 # Initial state
 ## manual mode
-init: ZeroGraspStep
+#init: ZeroGraspStep
 ## auto mode
 #init: ZeroGrasp::AddLeft
+init: S0::ZeroGrasp::AddRight
 
+# auto mode or manual mode
+auto_mode: true
 
 CoMTask:
   type: com
@@ -174,5 +198,3 @@ RightHandTask:
   [
   ]
 
-# auto mode or manual mode
-auto_mode: false

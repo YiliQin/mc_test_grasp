@@ -1,12 +1,3 @@
-TwoGrasp::RemoveLeft:
-  base: RemoveLeftFromTwoStep
-  hand: Left
-
-TwoGrasp::RemoveRight:
-  base: RemoveRightFromTwoStep
-  hand: Right
-
-####################################
 RemoveLeftFromOneStep:
   base: RemoveGraspStep
   hand: Left
@@ -21,6 +12,7 @@ RemoveLeftFromTwoStep:
 RemoveRightFromTwoStep:
   base: RemoveRightFromOneStep
 
+####################################
 RemoveGraspStep:
   base: RemoveGrasp
   hand: Left

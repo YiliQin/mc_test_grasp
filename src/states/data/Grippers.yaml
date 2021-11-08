@@ -2,13 +2,13 @@ OpenLeftGripperStep:
   base: Grippers
   grippers:
     l_gripper:
-      opening: 0.7
+      opening: 0.8
 
 OpenRightGripperStep:
   base: Grippers
   grippers:
     r_gripper:
-      opening: 0.7
+      opening: 0.8
 
 CloseLeftGripperStep:
   base: Grippers

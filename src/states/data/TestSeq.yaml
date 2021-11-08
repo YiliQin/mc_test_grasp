@@ -1,0 +1,56 @@
+S0::ZeroGrasp::AddRight:
+  base: ZeroGrasp::AddRight
+  target_pose: [0.1, 1.0, 0.0]
+S1::CloseRightGripper:
+  base: CloseRightGripperStep
+
+# theta: 90
+S2::OneGrasp::MoveRight:
+  base: OneGrasp::MoveRight 
+  # right_pos_world = [0.0, 0.9]
+  move_relative_pose: [-0.1, -0.1, 90.0]
+
+S3::OneGrasp::AddLeftRelative:
+  base: OneGrasp::AddLeftRelative
+  # left_pos_world = [0.0, 1.1]
+  target_relative_pose: [0.0, 0.2, 0.0]
+
+S4::CloseLeftGripper:
+  base: CloseLeftGripperStep
+
+S5::OpenLeftGripper:
+  base: OpenLeftGripperStep
+
+S6::TwoGrasp::ReqRemoveLeft:
+  base: TwoGrasp::ReqRemoveLeft
+
+S7::TwoGrasp::RemoveLeft:
+  base: TwoGrasp::RemoveLeft
+
+# theta: 45
+S8::OneGrasp::MoveRight:
+  base: OneGrasp::MoveRight
+  # right_pos_world = [0.1, 0.9]
+  move_relative_pose: [0.1, 0.0, -45.0]
+
+S9::OneGrasp::AddLeftRelative:
+  base: OneGrasp::AddLeftRelative
+  # left_pos_world = [-0.05, 1.05]
+  target_relative_pose: [-0.15, 0.15, 0.0]
+
+S10::CloseLeftGripper:
+  base: CloseLeftGripperStep
+
+S11::OpenLeftGripper:
+  base: OpenLeftGripperStep
+
+S12::TwoGrasp::ReqRemoveLeft:
+  base: TwoGrasp::ReqRemoveLeft
+
+S13::TwoGrasp::RemoveLeft:
+  base: TwoGrasp::RemoveLeft
+
+#
+S14::OneGrasp::RemoveRight:
+  base: OneGrasp::RemoveRight
+
