@@ -89,13 +89,13 @@ transitions:
   - [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
 
   # auto mode
-  - [ZeroGrasp::AddLeft, AddedLeft, OneGrasp::MoveLeft, Auto] 
-  - [OneGrasp::MoveLeft, MovedOK, OneGrasp::AddRightRelative, Auto] 
-  - [OneGrasp::AddRightRelative, AddedHand, TwoGrasp::ReqRemoveLeft, Auto] 
-  - [TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, TwoGrasp::RemoveLeft, Auto] 
-  - [TwoGrasp::RemoveLeft, RemovedLeft, OneGrasp::RemoveRight, Auto] 
-  - [OneGrasp::RemoveRight, RemovedRight, ZeroGrasp::AddRight, Auto] 
-  - [ZeroGrasp::AddRight, AddedRight, OneGrasp::AddLeft, Auto] 
+  #  - [ZeroGrasp::AddLeft, AddedLeft, OneGrasp::MoveLeft, Auto] 
+  #  - [OneGrasp::MoveLeft, MovedOK, OneGrasp::AddRightRelative, Auto] 
+  #  - [OneGrasp::AddRightRelative, AddedHand, TwoGrasp::ReqRemoveLeft, Auto] 
+  #  - [TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, TwoGrasp::RemoveLeft, Auto] 
+  #  - [TwoGrasp::RemoveLeft, RemovedLeft, OneGrasp::RemoveRight, Auto] 
+  #  - [OneGrasp::RemoveRight, RemovedRight, ZeroGrasp::AddRight, Auto] 
+  #  - [ZeroGrasp::AddRight, AddedRight, OneGrasp::AddLeft, Auto] 
 
   - [S0::ZeroGrasp::AddRight, AddedRight, S1::CloseRightGripper, Strict] 
   - [S1::CloseRightGripper, OK, S2::OneGrasp::MoveRight, Auto] 
@@ -112,8 +112,15 @@ transitions:
   - [S10::CloseLeftGripper, OK, S11::OpenLeftGripper, Strict] 
   - [S11::OpenLeftGripper, OK, S12::TwoGrasp::ReqRemoveLeft, Auto] 
   - [S12::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S13::TwoGrasp::RemoveLeft, Auto] 
+  - [S13::TwoGrasp::RemoveLeft, RemovedLeft, S14::OneGrasp::MoveRight, Auto] 
+    # theta = 0
+  - [S14::OneGrasp::MoveRight, MovedOK, S15::OneGrasp::AddLeftRelative, Auto] 
+  - [S15::OneGrasp::AddLeftRelative, AddedHand, S16::CloseLeftGripper, Auto] 
+  - [S16::CloseLeftGripper, OK, S17::OpenLeftGripper, Strict] 
+  - [S17::OpenLeftGripper, OK, S18::TwoGrasp::ReqRemoveLeft, Auto] 
+  - [S18::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S19::TwoGrasp::RemoveLeft, Auto] 
     # manual open gripper and finish
-  - [S13::TwoGrasp::RemoveLeft, RemovedLeft, S14::OneGrasp::RemoveRight, Strict] 
+  - [S19::TwoGrasp::RemoveLeft, RemovedLeft, S20::OneGrasp::RemoveRight, Strict] 
  
 
 # Initial state
