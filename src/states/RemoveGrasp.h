@@ -19,6 +19,8 @@ private:
     double approach_depth_ = 0.1;
     double approach_duration_ = 8.0;
     double reach_duration_ = 4.0;
+    std::vector<Eigen::Vector3d> left_waypoints_;
+    std::vector<Eigen::Vector3d> right_waypoints_;
 
     int step_ = 0;
     sva::PTransformd target_;

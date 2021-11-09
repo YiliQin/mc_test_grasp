@@ -23,6 +23,8 @@ private:
     std::string hand_to_add_ = "Left";
     // {Add, AddRelative, Move, Remove}
     std::string action_ = "Add";
+    std::vector<Eigen::Vector3d> left_waypoints_;
+    std::vector<Eigen::Vector3d> right_waypoints_;
 
     int step_ = 0;
     bool add_ = false;

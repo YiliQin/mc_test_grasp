@@ -6,6 +6,8 @@ void RemoveGrasp::configure(const mc_rtc::Configuration & config)
   config("approach_depth", approach_depth_);
   config("appraoch_duration", approach_duration_);
   config("reach_duration", reach_duration_);
+  config("left_waypoints", left_waypoints_);
+  config("right_waypoints", right_waypoints_);
 }
 
 void RemoveGrasp::start(mc_control::fsm::Controller & ctl_)
@@ -63,12 +65,14 @@ bool RemoveGrasp::run(mc_control::fsm::Controller & ctl_)
       ctl.solver().removeTask(ctl.leftHandTask_);
       ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", approach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.leftHandTask_; 
+      activeTask_->posWaypoints(left_waypoints_);
     }                                  
     else if (active_hand_ == "Right")  
     {                                  
       ctl.solver().removeTask(ctl.rightHandTask_);
       ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", approach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.rightHandTask_;
+      activeTask_->posWaypoints(right_waypoints_);
     }                                  
     else ;                             
 

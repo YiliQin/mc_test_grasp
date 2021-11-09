@@ -8,6 +8,9 @@ void ZeroGrasp::configure(const mc_rtc::Configuration & config)
   config("approach_duration", approach_duration_);
   config("reach_duration", reach_duration_);
   config("target_pose", target_pose_);
+  config("left_waypoints", left_waypoints_);
+  config("right_waypoints", right_waypoints_);
+
 }
 
 void ZeroGrasp::start(mc_control::fsm::Controller & ctl_)
@@ -39,14 +42,14 @@ bool ZeroGrasp::run(mc_control::fsm::Controller & ctl_)
       ctl.solver().removeTask(ctl.leftHandTask_);
       ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", approach_duration_, 1000.0, 1000, {}));                    
       activeTask_ = ctl.leftHandTask_; 
-      activeTask_->posWaypoints({{0.4, 0.4, 1.0}});
+      activeTask_->posWaypoints(left_waypoints_);
     }
     else if (hand_ == "Right")
     {
       ctl.solver().removeTask(ctl.rightHandTask_);
       ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper",approach_duration_, 1000.0, 1000, {}));                    
       activeTask_ = ctl.rightHandTask_; 
-      activeTask_->posWaypoints({{0.4, -0.4, 1.0}});
+      activeTask_->posWaypoints(right_waypoints_);
     }
     else ;
 
