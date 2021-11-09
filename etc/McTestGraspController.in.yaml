@@ -139,14 +139,13 @@ CoMTask:
   type: com
   weight: 1000
   stiffness: [5.0, 5.0, 1.0]
-  com: [0.0, 0.0, 0.85]
+  #com: [0.0, 0.0, 0.85]
   activeJoints: [Root, RLEG_JOINT0, RLEG_JOINT1, RLEG_JOINT2, RLEG_JOINT3, RLEG_JOINT4, RLEG_JOINT5, LLEG_JOINT0, LLEG_JOINT1, LLEG_JOINT2, LLEG_JOINT3, LLEG_JOINT4, LLEG_JOINT5]
 
 BodyOrientationTask:
   type: orientation
   body: BODY
-  #weight: 100
-  weight: 1000
+  weight: 100
   stiffness: 2.0
 
 ChestOrientationTask:
@@ -180,7 +179,6 @@ LeftHandTask:
     rotation: [0.0, 0.0, 0.0]
   controlPoints:
   [
-    #[0.2, 0.5, 1.2]
   ]
   oriWaypoints:
   [
@@ -202,7 +200,6 @@ RightHandTask:
     rotation: [0.0, 0.0, 0.0]
   controlPoints:
   [
-    #[0.2, -0.5, 1.2]
   ]
   oriWaypoints:
   [
