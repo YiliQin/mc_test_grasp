@@ -74,6 +74,7 @@ states: {}
 transitions:
   # manual mode
   #- [ZeroGraspStep, AddedLeft, CloseLeftGripperStep, Auto]
+  - [McTestGraspController_Initial, ManualMode, ZeroGraspStep, Auto]
   - [ZeroGraspStep, AddedLeft, OneGraspLeftHoldStep, Auto]
   - [OneGraspLeftHoldStep, AddedHand, TwoGraspStep, Auto]
   - [OneGraspLeftHoldStep, ReqRemove, RemoveLeftFromOneStep, Auto]
@@ -97,6 +98,7 @@ transitions:
   #  - [OneGrasp::RemoveRight, RemovedRight, ZeroGrasp::AddRight, Auto] 
   #  - [ZeroGrasp::AddRight, AddedRight, OneGrasp::AddLeft, Auto] 
 
+  - [McTestGraspController_Initial, AutoMode, S0::ZeroGrasp::AddRight, Auto] 
   - [S0::ZeroGrasp::AddRight, AddedRight, S1::CloseRightGripper, Strict] 
   - [S1::CloseRightGripper, OK, S2::OneGrasp::MoveRight, Auto] 
     # theta = 90
@@ -128,10 +130,10 @@ transitions:
 #init: ZeroGraspStep
 ## auto mode
 #init: ZeroGrasp::AddLeft
-init: S0::ZeroGrasp::AddRight
+init: McTestGraspController_Initial
 
 # auto mode or manual mode
-auto_mode: true
+#auto_mode: true
 
 CoMTask:
   type: com

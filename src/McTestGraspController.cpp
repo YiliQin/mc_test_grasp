@@ -5,7 +5,7 @@ McTestGraspController::McTestGraspController(mc_rbdyn::RobotModulePtr rm, double
 : mc_control::fsm::Controller(rm, dt, config)
 {
 
-  config("auto_mode", auto_mode_);
+  //config("auto_mode", auto_mode_);
 
   // init tasks
   comTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::CoMTask>(solver(), config("CoMTask"));
