@@ -111,12 +111,14 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
       ctl.solver().removeTask(ctl.leftHandTask_);
       ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", approach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.leftHandTask_;
+      activeTask_->posWaypoints({{0.4, 0.4, 1.0}});
     }
     else if (hand_to_add_ == "Right")
     {
       ctl.solver().removeTask(ctl.rightHandTask_);
       ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", approach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.rightHandTask_;
+      activeTask_->posWaypoints({{0.4, -0.4, 1.0}});
     }
     else ; 
 

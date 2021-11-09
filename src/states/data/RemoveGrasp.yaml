@@ -17,6 +17,6 @@ RemoveGraspStep:
   base: RemoveGrasp
   hand: Left
   approach_depth: 0.1
-  approach_duration: 8.0
-  reach_duration: 4.0
+  approach_duration: 10.0
+  reach_duration: 5.0
  

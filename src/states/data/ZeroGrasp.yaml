@@ -18,7 +18,7 @@ ZeroGraspStep:
   target_pose: [0.0, 1.0, 0.0]
   plane_depth: 0.6
   approach_depth: 0.1
-  approach_duration: 8.0
-  reach_duration: 4.0
+  approach_duration: 10.0
+  reach_duration: 5.0
 
 

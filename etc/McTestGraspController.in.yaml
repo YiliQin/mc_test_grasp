@@ -140,12 +140,13 @@ CoMTask:
   weight: 1000
   stiffness: [5.0, 5.0, 1.0]
   com: [0.0, 0.0, 0.85]
-  active_joints: [Root, RLEG_JOINT0, RLEG_JOINT1, RLEG_JOINT2, RLEG_JOINT3, RLEG_JOINT4, RLEG_JOINT5, LLEG_JOINT0, LLEG_JOINT1, LLEG_JOINT2, LLEG_JOINT3, LLEG_JOINT4, LLEG_JOINT5]
+  activeJoints: [Root, RLEG_JOINT0, RLEG_JOINT1, RLEG_JOINT2, RLEG_JOINT3, RLEG_JOINT4, RLEG_JOINT5, LLEG_JOINT0, LLEG_JOINT1, LLEG_JOINT2, LLEG_JOINT3, LLEG_JOINT4, LLEG_JOINT5]
 
 BodyOrientationTask:
   type: orientation
   body: BODY
-  weight: 100
+  #weight: 100
+  weight: 1000
   stiffness: 2.0
 
 ChestOrientationTask:
@@ -161,7 +162,7 @@ LookAtHandTask:
   targetPos: [1.0, 0.0, 1.2]
   weight: 100
   stiffness: 1.0
-  active_joints: [HEAD_JOINT0, HEAD_JOINT1]
+  activeJoints: [HEAD_JOINT0, HEAD_JOINT1]
 
 LeftHandTask:
   type: bspline_trajectory 
