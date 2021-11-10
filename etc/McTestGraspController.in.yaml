@@ -113,10 +113,23 @@ transitions:
   - [S16::CloseLeftGripper, OK, S17::OpenLeftGripper, Strict] 
   - [S17::OpenLeftGripper, OK, S18::TwoGrasp::ReqRemoveLeft, Auto] 
   - [S18::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S19::TwoGrasp::RemoveLeft, Auto] 
+  - [S19::TwoGrasp::RemoveLeft, RemovedLeft, S20::OneGrasp::MoveRight, Auto] 
+    # theta = -45
+  - [S20::OneGrasp::MoveRight, MovedOK, S21::OneGrasp::AddLeftRelative, Auto] 
+  - [S21::OneGrasp::AddLeftRelative, AddedHand, S22::CloseLeftGripper, Auto] 
+  - [S22::CloseLeftGripper, OK, S23::OpenLeftGripper, Strict] 
+  - [S23::OpenLeftGripper, OK, S24::TwoGrasp::ReqRemoveLeft, Auto] 
+  - [S24::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S25::TwoGrasp::RemoveLeft, Auto] 
+  - [S25::TwoGrasp::RemoveLeft, RemovedLeft, S26::OneGrasp::MoveRight, Auto] 
+    # theta = -90
+  - [S26::OneGrasp::MoveRight, MovedOK, S27::OneGrasp::AddLeftRelative, Auto] 
+  - [S27::OneGrasp::AddLeftRelative, AddedHand, S28::CloseLeftGripper, Auto] 
+  - [S28::CloseLeftGripper, OK, S29::OpenLeftGripper, Strict] 
+  - [S29::OpenLeftGripper, OK, S30::TwoGrasp::ReqRemoveLeft, Auto] 
+  - [S30::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S31::TwoGrasp::RemoveLeft, Auto] 
     # manual open gripper and finish
-  - [S19::TwoGrasp::RemoveLeft, RemovedLeft, S20::OneGrasp::RemoveRight, Strict] 
+  - [S31::TwoGrasp::RemoveLeft, RemovedLeft, S32::OneGrasp::RemoveRight, Strict] 
  
-
 # Initial state
 ## manual mode
 #init: ZeroGraspStep
@@ -132,7 +145,7 @@ CoMTask:
   dimWeight: [1.0, 1.0, 0.3]
   stiffness: [50.0, 50.0, 5.0]
   #com: [0.0, 0.0, 0.85]
-  #activeJoints: [Root, RLEG_JOINT0, RLEG_JOINT1, RLEG_JOINT2, RLEG_JOINT3, RLEG_JOINT4, RLEG_JOINT5, LLEG_JOINT0, LLEG_JOINT1, LLEG_JOINT2, LLEG_JOINT3, LLEG_JOINT4, LLEG_JOINT5]
+  activeJoints: [Root, RLEG_JOINT0, RLEG_JOINT1, RLEG_JOINT2, RLEG_JOINT3, RLEG_JOINT4, RLEG_JOINT5, LLEG_JOINT0, LLEG_JOINT1, LLEG_JOINT2, LLEG_JOINT3, LLEG_JOINT4, LLEG_JOINT5]
 
 BodyOrientationTask:
   type: orientation
@@ -163,7 +176,7 @@ LeftHandTask:
   duration: 10.0
   dimWeight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
   displaySamples: 20
-  #activeJoints: [LARM_JOINT0, LARM_JOINT1, LARM_JOINT2, LARM_JOINT3, LARM_JOINT4, LARM_JOINT5, LARM_JOINT6, LARM_JOINT7]
+  activeJoints: [LARM_JOINT0, LARM_JOINT1, LARM_JOINT2, LARM_JOINT3, LARM_JOINT4, LARM_JOINT5, LARM_JOINT6, LARM_JOINT7]
   completion:
     OR:
       - timeElapsed: true
@@ -185,7 +198,7 @@ RightHandTask:
   duration: 10.0
   dimWeight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
   displaySamples: 20
-  #activeJoints: [RARM_JOINT0, RARM_JOINT1, RARM_JOINT2, RARM_JOINT3, RARM_JOINT4, RARM_JOINT5, RARM_JOINT6, RARM_JOINT7]
+  activeJoints: [RARM_JOINT0, RARM_JOINT1, RARM_JOINT2, RARM_JOINT3, RARM_JOINT4, RARM_JOINT5, RARM_JOINT6, RARM_JOINT7]
   completion:
     OR:
       - timeElapsed: true
