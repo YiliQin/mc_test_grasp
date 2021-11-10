@@ -150,7 +150,7 @@ CoMTask:
 BodyOrientationTask:
   type: orientation
   body: BODY
-  weight: 100
+  weight: 500
   stiffness: 5.0
 
 ChestOrientationTask:

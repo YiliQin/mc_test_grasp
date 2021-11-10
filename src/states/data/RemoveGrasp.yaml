@@ -16,9 +16,9 @@ RemoveRightFromTwoStep:
 RemoveGraspStep:
   base: RemoveGrasp
   hand: Left
-  approach_depth: 0.1
+  approach_depth: 0.15
   approach_duration: 10.0
   reach_duration: 5.0
-  left_waypoints: [ [0.4, 0.8, 1.0] ]
-  right_waypoints: [ [0.4, -0.8, 1.0] ]
+  left_waypoints: [ [0.4, 0.4, 1.0] ]
+  right_waypoints: [ [0.4, -0.4, 1.0] ]
  

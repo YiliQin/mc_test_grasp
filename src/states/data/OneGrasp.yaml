@@ -65,13 +65,13 @@ OneGraspStep:
   # {Add, AddRelative, Move, Remove}
   action: Add
   plane_depth: 0.6
-  approach_depth: 0.1
+  approach_depth: 0.15
   approach_duration: 10.0
   reach_duration: 5.0
   move_duration: 5.0
   target_pose: [0.2, 1.0 , 0.0]
   target_relative_pose: [0.0, 0.0, 0.0]
   move_relative_pose: [0.0, 0.0, 0.0]
-  left_waypoints: [ [0.4, 0.8, 1.0] ]
-  right_waypoints: [ [0.4, -0.8, 1.0] ]
+  left_waypoints: [ [0.4, 0.4, 1.0] ]
+  right_waypoints: [ [0.4, -0.4, 1.0] ]
  
