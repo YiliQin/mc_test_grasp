@@ -90,14 +90,6 @@ transitions:
   - [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
 
   # auto mode
-  #  - [ZeroGrasp::AddLeft, AddedLeft, OneGrasp::MoveLeft, Auto] 
-  #  - [OneGrasp::MoveLeft, MovedOK, OneGrasp::AddRightRelative, Auto] 
-  #  - [OneGrasp::AddRightRelative, AddedHand, TwoGrasp::ReqRemoveLeft, Auto] 
-  #  - [TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, TwoGrasp::RemoveLeft, Auto] 
-  #  - [TwoGrasp::RemoveLeft, RemovedLeft, OneGrasp::RemoveRight, Auto] 
-  #  - [OneGrasp::RemoveRight, RemovedRight, ZeroGrasp::AddRight, Auto] 
-  #  - [ZeroGrasp::AddRight, AddedRight, OneGrasp::AddLeft, Auto] 
-
   - [McTestGraspController_Initial, AutoMode, S0::ZeroGrasp::AddRight, Auto] 
   - [S0::ZeroGrasp::AddRight, AddedRight, S1::CloseRightGripper, Strict] 
   - [S1::CloseRightGripper, OK, S2::OneGrasp::MoveRight, Auto] 
@@ -129,7 +121,6 @@ transitions:
 ## manual mode
 #init: ZeroGraspStep
 ## auto mode
-#init: ZeroGrasp::AddLeft
 init: McTestGraspController_Initial
 
 # auto mode or manual mode
@@ -138,15 +129,16 @@ init: McTestGraspController_Initial
 CoMTask:
   type: com
   weight: 1000
-  stiffness: [5.0, 5.0, 1.0]
+  dimWeight: [1.0, 1.0, 0.3]
+  stiffness: [50.0, 50.0, 5.0]
   #com: [0.0, 0.0, 0.85]
-  activeJoints: [Root, RLEG_JOINT0, RLEG_JOINT1, RLEG_JOINT2, RLEG_JOINT3, RLEG_JOINT4, RLEG_JOINT5, LLEG_JOINT0, LLEG_JOINT1, LLEG_JOINT2, LLEG_JOINT3, LLEG_JOINT4, LLEG_JOINT5]
+  #activeJoints: [Root, RLEG_JOINT0, RLEG_JOINT1, RLEG_JOINT2, RLEG_JOINT3, RLEG_JOINT4, RLEG_JOINT5, LLEG_JOINT0, LLEG_JOINT1, LLEG_JOINT2, LLEG_JOINT3, LLEG_JOINT4, LLEG_JOINT5]
 
 BodyOrientationTask:
   type: orientation
   body: BODY
-  weight: 100
-  stiffness: 2.0
+  weight: 300
+  stiffness: 5.0
 
 ChestOrientationTask:
   type: orientation
@@ -166,11 +158,12 @@ LookAtHandTask:
 LeftHandTask:
   type: bspline_trajectory 
   surface: LeftGripper
-  weight: 1000
-  stiffness: 1000.0
+  weight: 200
+  stiffness: 100.0
   duration: 10.0
   dimWeight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
   displaySamples: 20
+  #activeJoints: [LARM_JOINT0, LARM_JOINT1, LARM_JOINT2, LARM_JOINT3, LARM_JOINT4, LARM_JOINT5, LARM_JOINT6, LARM_JOINT7]
   completion:
     OR:
       - timeElapsed: true
@@ -187,11 +180,12 @@ LeftHandTask:
 RightHandTask:
   type: bspline_trajectory 
   surface: RightGripper
-  weight: 1000
-  stiffness: 1000.0
+  weight: 200
+  stiffness: 100.0
   duration: 10.0
   dimWeight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
   displaySamples: 20
+  #activeJoints: [RARM_JOINT0, RARM_JOINT1, RARM_JOINT2, RARM_JOINT3, RARM_JOINT4, RARM_JOINT5, RARM_JOINT6, RARM_JOINT7]
   completion:
     OR:
       - timeElapsed: true
