@@ -120,6 +120,9 @@ S31::TwoGrasp::RemoveLeft:
   base: TwoGrasp::RemoveLeft
 
 #
-S32::OneGrasp::RemoveRight:
+S32::OpenRightGripper:
+  base: OpenRightGripperStep
+
+S33::OneGrasp::RemoveRight:
   base: OneGrasp::RemoveRight
 
