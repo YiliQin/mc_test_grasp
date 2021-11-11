@@ -65,7 +65,7 @@ OneGraspStep:
   # {Add, AddRelative, Move, Remove}
   action: Add
   plane_depth: 0.6
-  approach_depth: 0.15
+  approach_depth: 0.18
   approach_duration: 10.0
   reach_duration: 5.0
   move_duration: 5.0
