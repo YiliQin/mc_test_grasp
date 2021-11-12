@@ -13,7 +13,8 @@ S2::OneGrasp::MoveRight:
 S3::OneGrasp::AddLeftRelative:
   base: OneGrasp::AddLeftRelative
   # left_pos_world = [-0.1, 1.2]
-  target_relative_pose: [0.0, 0.2, 0.0]
+  #target_relative_pose: [0.0, 0.2, 0.0] # distance = 20cm
+  target_relative_pose: [0.0, 0.15, 0.0] # distance = 15cm
 
 S4::CloseLeftGripper:
   base: CloseLeftGripperStep
@@ -36,7 +37,8 @@ S8::OneGrasp::MoveRight:
 S9::OneGrasp::AddLeftRelative:
   base: OneGrasp::AddLeftRelative
   # left_pos_world = [-0.25, 1.15]
-  target_relative_pose: [-0.15, 0.15, 0.0]
+  #target_relative_pose: [-0.15, 0.15, 0.0] # distance = 20cm
+  target_relative_pose: [-0.11, 0.11, 0.0] # distance = 15cm
 
 S10::CloseLeftGripper:
   base: CloseLeftGripperStep
@@ -59,7 +61,8 @@ S14::OneGrasp::MoveRight:
 S15::OneGrasp::AddLeftRelative:
   base: OneGrasp::AddLeftRelative
   # left_pos_world = [-0.3, 1.0]
-  target_relative_pose: [-0.20, 0.0, 0.0]
+  #target_relative_pose: [-0.20, 0.0, 0.0] # distance = 20cm
+  target_relative_pose: [-0.15, 0.0, 0.0] # distance = 15cm
 
 S16::CloseLeftGripper:
   base: CloseLeftGripperStep
@@ -82,7 +85,8 @@ S20::OneGrasp::MoveRight:
 S21::OneGrasp::AddLeftRelative:
   base: OneGrasp::AddLeftRelative
   # left_pos_world = [-0.25, 0.85]
-  target_relative_pose: [-0.15, -0.15, 0.0]
+  #target_relative_pose: [-0.15, -0.15, 0.0] # distance = 20cm
+  target_relative_pose: [-0.11, -0.11, 0.0] # distance = 15cm
 
 S22::CloseLeftGripper:
   base: CloseLeftGripperStep
@@ -105,7 +109,8 @@ S26::OneGrasp::MoveRight:
 S27::OneGrasp::AddLeftRelative:
   base: OneGrasp::AddLeftRelative
   # left_pos_world = [-0.1, 0.8]
-  target_relative_pose: [0.0, -0.20, 0.0]
+  #target_relative_pose: [0.0, -0.20, 0.0] # distance = 20cm
+  target_relative_pose: [0.0, -0.15, 0.0] # distance = 15cm
 
 S28::CloseLeftGripper:
   base: CloseLeftGripperStep
