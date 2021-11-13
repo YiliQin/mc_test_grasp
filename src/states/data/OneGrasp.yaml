@@ -72,6 +72,6 @@ OneGraspStep:
   target_pose: [0.2, 1.0 , 0.0]
   target_relative_pose: [0.0, 0.0, 0.0]
   move_relative_pose: [0.0, 0.0, 0.0]
-  left_waypoints: [ [0.4, 0.6, 0.9] ]
-  right_waypoints: [ [0.4, -0.6, 0.9] ]
+  left_waypoints: [ [0.4, 0.6, 0.8] ]
+  right_waypoints: [ [0.4, -0.6, 0.8] ]
  

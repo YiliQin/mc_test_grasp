@@ -19,5 +19,5 @@ RemoveGraspStep:
   approach_depth: 0.1
   approach_duration: 10.0
   reach_duration: 5.0
-  left_waypoints: [ [0.4, 0.6, 0.9] ]
-  right_waypoints: [ [0.4, -0.6, 0.9] ]
+  left_waypoints: [ [0.4, 0.6, 0.8] ]
+  right_waypoints: [ [0.4, -0.6, 0.8] ]

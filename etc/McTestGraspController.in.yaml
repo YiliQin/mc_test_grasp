@@ -164,9 +164,9 @@ LookAtHandTask:
   type: lookAt
   body: azure_depth_frame
   bodyVector: [0.0, 0.0, 0.0]
-  targetPos: [1.0, 0.0, 1.2]
+  targetPos: [0.6, 0.1, 1.0]
   weight: 100
-  stiffness: 1.0
+  stiffness: 2.0
   activeJoints: [HEAD_JOINT0, HEAD_JOINT1]
 
 LeftHandTask:
