@@ -177,10 +177,12 @@ StabilizerTask:
       weight: 1000
       dimWeight: [1.0, 1.0, 0.3]
     torso:
-      stiffness: 300
+      #stiffness: 300
+      stiffness: 50.0
       weight: 200
     pelvis:
       stiffness: 300
+      #stiffness: 50
       weight: 200
 
 LookAtHandTask:
