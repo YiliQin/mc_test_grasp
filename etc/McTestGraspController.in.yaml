@@ -162,6 +162,26 @@ init: McTestGraspController_Initial
 StabilizerTask:
   type: lipm_stabilizer
   contacts: [Left, Right]
+  admittance:
+    cop: [0.01, 0.01]
+  dcm_tracking:
+    gains:
+      prop: 6
+      integral: 0
+      deriv: 0.5
+      comdError: 0.0
+      zmpd: 0.1
+  tasks:
+    com:
+      stiffness: [1000, 1000, 300]
+      weight: 1000
+      dimWeight: [1.0, 1.0, 0.3]
+    torso:
+      stiffness: 300
+      weight: 200
+    pelvis:
+      stiffness: 300
+      weight: 200
 
 LookAtHandTask:
   type: lookAt
