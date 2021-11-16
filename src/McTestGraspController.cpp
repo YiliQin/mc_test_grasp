@@ -8,12 +8,16 @@ McTestGraspController::McTestGraspController(mc_rbdyn::RobotModulePtr rm, double
   //config("auto_mode", auto_mode_);
 
   // init tasks
-  comTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::CoMTask>(solver(), config("CoMTask"));
-  solver().addTask(comTask_);
-  bodyOrientationTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::OrientationTask>(solver(), config("BodyOrientationTask"));
-  solver().addTask(bodyOrientationTask_);
-  chestOrientationTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::OrientationTask>(solver(), config("ChestOrientationTask"));
-  solver().addTask(chestOrientationTask_);
+  //comTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::CoMTask>(solver(), config("CoMTask"));
+  //solver().addTask(comTask_);
+  //bodyOrientationTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::OrientationTask>(solver(), config("BodyOrientationTask"));
+  //solver().addTask(bodyOrientationTask_);
+  //chestOrientationTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::OrientationTask>(solver(), config("ChestOrientationTask"));
+  //solver().addTask(chestOrientationTask_);
+
+  stabilizerTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::lipm_stabilizer::StabilizerTask>(solver(), config("StabilizerTask"));
+  solver().addTask(stabilizerTask_);
+
   lookAtHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::LookAtTask>(solver(), config("LookAtHandTask"));
   solver().addTask(lookAtHandTask_);
 
@@ -40,14 +44,17 @@ void McTestGraspController::reset(const mc_control::ControllerResetData & reset_
 {
   mc_control::fsm::Controller::reset(reset_data);
 
-  comTask_->reset();
-  solver().addTask(comTask_);
+  //comTask_->reset();
+  //solver().addTask(comTask_);
 
-  bodyOrientationTask_->reset();
-  solver().addTask(bodyOrientationTask_);
+  //bodyOrientationTask_->reset();
+  //solver().addTask(bodyOrientationTask_);
 
-  chestOrientationTask_->reset();
-  solver().addTask(chestOrientationTask_);
+  //chestOrientationTask_->reset();
+  //solver().addTask(chestOrientationTask_);
+
+  stabilizerTask_->reset();
+  solver().addTask(stabilizerTask_);
 
   lookAtHandTask_->reset();
   solver().addTask(lookAtHandTask_);

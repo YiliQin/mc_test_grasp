@@ -2,8 +2,9 @@
 
 #include <mc_control/mc_controller.h>
 #include <mc_control/fsm/Controller.h>
-#include <mc_tasks/CoMTask.h>
-#include <mc_tasks/OrientationTask.h>
+//#include <mc_tasks/CoMTask.h>
+//#include <mc_tasks/OrientationTask.h>
+#include <mc_tasks/lipm_stabilizer/StabilizerTask.h>
 #include <mc_tasks/LookAtTask.h>
 #include <mc_tasks/BSplineTrajectoryTask.h>
 #include "api.h"
@@ -17,9 +18,10 @@ struct McTestGraspController_DLLAPI McTestGraspController : public mc_control::f
     void reset(const mc_control::ControllerResetData & reset_data) override;
     
     // tasks
-    std::shared_ptr<mc_tasks::CoMTask> comTask_;
-    std::shared_ptr<mc_tasks::OrientationTask> bodyOrientationTask_; 
-    std::shared_ptr<mc_tasks::OrientationTask> chestOrientationTask_;
+    //std::shared_ptr<mc_tasks::CoMTask> comTask_;
+    //std::shared_ptr<mc_tasks::OrientationTask> bodyOrientationTask_; 
+    //std::shared_ptr<mc_tasks::OrientationTask> chestOrientationTask_;
+    std::shared_ptr<mc_tasks::lipm_stabilizer::StabilizerTask> stabilizerTask_;
     std::shared_ptr<mc_tasks::LookAtTask> lookAtHandTask_; 
     std::shared_ptr<mc_tasks::BSplineTrajectoryTask> leftHandTask_;
 		std::shared_ptr<mc_tasks::BSplineTrajectoryTask> rightHandTask_;
