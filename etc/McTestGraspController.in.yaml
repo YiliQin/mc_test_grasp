@@ -89,47 +89,71 @@ transitions:
   - [TwoGraspStep, ReqRemoveRight, RemoveRightFromTwoStep, Auto]
   - [RemoveRightFromTwoStep, RemovedRight, OneGraspLeftHoldStep, Auto]
 
-  # auto mode
-  - [McTestGraspController_Initial, AutoMode, S0::ZeroGrasp::AddRight, Auto] 
-  - [S0::ZeroGrasp::AddRight, AddedRight, S1::CloseRightGripper, Strict] 
-  - [S1::CloseRightGripper, OK, S2::OneGrasp::MoveRight, Auto] 
-    # theta = 90
-  - [S2::OneGrasp::MoveRight, MovedOK, S3::OneGrasp::AddLeftRelative, Auto] 
-  - [S3::OneGrasp::AddLeftRelative, AddedHand, S4::CloseLeftGripper, Auto] 
-  - [S4::CloseLeftGripper, OK, S5::OpenLeftGripper, Strict] 
-  - [S5::OpenLeftGripper, OK, S6::TwoGrasp::ReqRemoveLeft, Auto] 
-  - [S6::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S7::TwoGrasp::RemoveLeft, Auto] 
-  - [S7::TwoGrasp::RemoveLeft, RemovedLeft, S8::OneGrasp::MoveRight, Auto] 
-    # theta = 45
-  - [S8::OneGrasp::MoveRight, MovedOK, S9::OneGrasp::AddLeftRelative, Auto] 
-  - [S9::OneGrasp::AddLeftRelative, AddedHand, S10::CloseLeftGripper, Auto] 
-  - [S10::CloseLeftGripper, OK, S11::OpenLeftGripper, Strict] 
-  - [S11::OpenLeftGripper, OK, S12::TwoGrasp::ReqRemoveLeft, Auto] 
-  - [S12::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S13::TwoGrasp::RemoveLeft, Auto] 
-  - [S13::TwoGrasp::RemoveLeft, RemovedLeft, S14::OneGrasp::MoveRight, Auto] 
-    # theta = 0
-  - [S14::OneGrasp::MoveRight, MovedOK, S15::OneGrasp::AddLeftRelative, Auto] 
-  - [S15::OneGrasp::AddLeftRelative, AddedHand, S16::CloseLeftGripper, Auto] 
-  - [S16::CloseLeftGripper, OK, S17::OpenLeftGripper, Strict] 
-  - [S17::OpenLeftGripper, OK, S18::TwoGrasp::ReqRemoveLeft, Auto] 
-  - [S18::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S19::TwoGrasp::RemoveLeft, Auto] 
-  - [S19::TwoGrasp::RemoveLeft, RemovedLeft, S20::OneGrasp::MoveRight, Auto] 
-    # theta = -45
-  - [S20::OneGrasp::MoveRight, MovedOK, S21::OneGrasp::AddLeftRelative, Auto] 
-  - [S21::OneGrasp::AddLeftRelative, AddedHand, S22::CloseLeftGripper, Auto] 
-  - [S22::CloseLeftGripper, OK, S23::OpenLeftGripper, Strict] 
-  - [S23::OpenLeftGripper, OK, S24::TwoGrasp::ReqRemoveLeft, Auto] 
-  - [S24::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S25::TwoGrasp::RemoveLeft, Auto] 
-  - [S25::TwoGrasp::RemoveLeft, RemovedLeft, S26::OneGrasp::MoveRight, Auto] 
-    # theta = -90
-  - [S26::OneGrasp::MoveRight, MovedOK, S27::OneGrasp::AddLeftRelative, Auto] 
-  - [S27::OneGrasp::AddLeftRelative, AddedHand, S28::CloseLeftGripper, Auto] 
-  - [S28::CloseLeftGripper, OK, S29::OpenLeftGripper, Strict] 
-  - [S29::OpenLeftGripper, OK, S30::TwoGrasp::ReqRemoveLeft, Auto] 
-  - [S30::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S31::TwoGrasp::RemoveLeft, Auto] 
-    # manual open gripper and finish
-  - [S31::TwoGrasp::RemoveLeft, RemovedLeft, S32::OneGrasp::RemoveRight, Strict] 
- 
+    #  # auto mode
+    #  - [McTestGraspController_Initial, AutoMode, S0::ZeroGrasp::AddRight, Auto] 
+    #  - [S0::ZeroGrasp::AddRight, AddedRight, S1::CloseRightGripper, Strict] 
+    #  - [S1::CloseRightGripper, OK, S2::OneGrasp::MoveRight, Auto] 
+    #    # theta = 90
+    #  - [S2::OneGrasp::MoveRight, MovedOK, S3::OneGrasp::AddLeftRelative, Auto] 
+    #  - [S3::OneGrasp::AddLeftRelative, AddedHand, S4::CloseLeftGripper, Auto] 
+    #  - [S4::CloseLeftGripper, OK, S5::OpenLeftGripper, Strict] 
+    #  - [S5::OpenLeftGripper, OK, S6::TwoGrasp::ReqRemoveLeft, Auto] 
+    #  - [S6::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S7::TwoGrasp::RemoveLeft, Auto] 
+    #  - [S7::TwoGrasp::RemoveLeft, RemovedLeft, S8::OneGrasp::MoveRight, Auto] 
+    #    # theta = 45
+    #  - [S8::OneGrasp::MoveRight, MovedOK, S9::OneGrasp::AddLeftRelative, Auto] 
+    #  - [S9::OneGrasp::AddLeftRelative, AddedHand, S10::CloseLeftGripper, Auto] 
+    #  - [S10::CloseLeftGripper, OK, S11::OpenLeftGripper, Strict] 
+    #  - [S11::OpenLeftGripper, OK, S12::TwoGrasp::ReqRemoveLeft, Auto] 
+    #  - [S12::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S13::TwoGrasp::RemoveLeft, Auto] 
+    #  - [S13::TwoGrasp::RemoveLeft, RemovedLeft, S14::OneGrasp::MoveRight, Auto] 
+    #    # theta = 0
+    #  - [S14::OneGrasp::MoveRight, MovedOK, S15::OneGrasp::AddLeftRelative, Auto] 
+    #  - [S15::OneGrasp::AddLeftRelative, AddedHand, S16::CloseLeftGripper, Auto] 
+    #  - [S16::CloseLeftGripper, OK, S17::OpenLeftGripper, Strict] 
+    #  - [S17::OpenLeftGripper, OK, S18::TwoGrasp::ReqRemoveLeft, Auto] 
+    #  - [S18::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S19::TwoGrasp::RemoveLeft, Auto] 
+    #  - [S19::TwoGrasp::RemoveLeft, RemovedLeft, S20::OneGrasp::MoveRight, Auto] 
+    #    # theta = -45
+    #  - [S20::OneGrasp::MoveRight, MovedOK, S21::OneGrasp::AddLeftRelative, Auto] 
+    #  - [S21::OneGrasp::AddLeftRelative, AddedHand, S22::CloseLeftGripper, Auto] 
+    #  - [S22::CloseLeftGripper, OK, S23::OpenLeftGripper, Strict] 
+    #  - [S23::OpenLeftGripper, OK, S24::TwoGrasp::ReqRemoveLeft, Auto] 
+    #  - [S24::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S25::TwoGrasp::RemoveLeft, Auto] 
+    #  - [S25::TwoGrasp::RemoveLeft, RemovedLeft, S26::OneGrasp::MoveRight, Auto] 
+    #    # theta = -90
+    #  - [S26::OneGrasp::MoveRight, MovedOK, S27::OneGrasp::AddLeftRelative, Auto] 
+    #  - [S27::OneGrasp::AddLeftRelative, AddedHand, S28::CloseLeftGripper, Auto] 
+    #  - [S28::CloseLeftGripper, OK, S29::OpenLeftGripper, Strict] 
+    #  - [S29::OpenLeftGripper, OK, S30::TwoGrasp::ReqRemoveLeft, Auto] 
+    #  - [S30::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, S31::TwoGrasp::RemoveLeft, Auto] 
+    #    # manual open gripper and finish
+    #  - [S31::TwoGrasp::RemoveLeft, RemovedLeft, S32::OneGrasp::RemoveRight, Strict] 
+
+  #  assemble belt 
+  - [McTestGraspController_Initial, AutoMode, Asmb_s0::ZeroGrasp::AddRight, Auto] 
+  - [Asmb_s0::ZeroGrasp::AddRight, AddedRight, Asmb_s1::CloseRightGripper, Auto] 
+  - [Asmb_s1::CloseRightGripper, OK, Asmb_s2::OneGrasp::MoveRight, Auto] 
+  - [Asmb_s2::OneGrasp::MoveRight, MovedOK, Asmb_s3::OneGrasp::MoveRight, Auto] 
+  - [Asmb_s3::OneGrasp::MoveRight, MovedOK, Asmb_s4::OneGrasp::AddLeftRelative, Auto] 
+  - [Asmb_s4::OneGrasp::AddLeftRelative, AddedHand, Asmb_s5::CloseLeftGripper, Auto] 
+  - [Asmb_s5::CloseLeftGripper, OK, Asmb_s6::OpenRightGripper, Auto] 
+  - [Asmb_s6::OpenRightGripper, OK, Asmb_s7::TwoGrasp::ReqRemoveRight, Auto] 
+  - [Asmb_s7::TwoGrasp::ReqRemoveRight, ReqRemoveRight, Asmb_s8::TwoGrasp::RemoveRight, Auto] 
+  - [Asmb_s8::TwoGrasp::RemoveRight, RemovedRight, Asmb_s9::OneGrasp::MoveLeft, Auto] 
+  - [Asmb_s9::OneGrasp::MoveLeft, MovedOK, Asmb_s10::OneGrasp::AddRightRelative, Auto] 
+  - [Asmb_s10::OneGrasp::AddRightRelative, AddedHand, Asmb_s11::CloseRightGripper, Auto] 
+  - [Asmb_s11::CloseRightGripper, OK, Asmb_s12::OpenLeftGripper, Auto] 
+  - [Asmb_s12::OpenLeftGripper, OK, Asmb_s13::TwoGrasp::ReqRemoveLeft, Auto] 
+  - [Asmb_s13::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, Asmb_s14::TwoGrasp::RemoveLeft, Auto] 
+  - [Asmb_s14::TwoGrasp::RemoveLeft, RemovedLeft, Asmb_s15::OneGrasp::MoveRight, Auto] 
+  - [Asmb_s15::OneGrasp::MoveRight, MovedOK, Asmb_s16::OneGrasp::MoveRight, Strict] 
+  - [Asmb_s16::OneGrasp::MoveRight, MovedOK, Asmb_s17::OneGrasp::AddLeftRelative, Strict] 
+  - [Asmb_s17::OneGrasp::AddLeftRelative, AddedHand, Asmb_s18::CloseRightGripper, Strict] 
+  - [Asmb_s18::CloseRightGripper, OK, Asmb_s19::OpenRightGripper, Strict] 
+  - [Asmb_s19::OpenRightGripper, OK, Asmb_s20::TwoGrasp::ReqRemoveRight, Auto] 
+  - [Asmb_s20::TwoGrasp::ReqRemoveRight, ReqRemoveRight, Asmb_s21::TwoGrasp::RemoveRight, Auto] 
+
 # Initial state
 ## manual mode
 #init: ZeroGraspStep
