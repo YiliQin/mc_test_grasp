@@ -39,7 +39,8 @@ Asmb_s9::OneGrasp::MoveLeft:
 
 Asmb_s10::OneGrasp::AddRightRelative:
   base: OneGrasp::AddRightRelative
-  target_pose: [0.15, 0.0, 0.0]
+  #target_relative_pose: [0.15, 0.0, 0.0]
+  target_relative_pose: [0.15, 0.0, -180.0]
 
 Asmb_s11::CloseRightGripper:
   base: CloseRightGripperStep
@@ -68,8 +69,8 @@ Asmb_s17::OneGrasp::AddLeftRelative:
   # left_pos_world = []
   target_relative_pose: [0.10, 0.20, 0.0]
 
-Asmb_s18::CloseRightGripper:
-  base: CloseRightGripperStep
+Asmb_s18::CloseLeftGripper:
+  base: CloseLeftGripperStep
 
 Asmb_s19::OpenRightGripper:
   base: OpenRightGripperStep
@@ -79,4 +80,18 @@ Asmb_s20::TwoGrasp::ReqRemoveRight:
 
 Asmb_s21::TwoGrasp::RemoveRight:
   base: TwoGrasp::RemoveRight
+
+Asmb_s22::OneGrasp::MoveLeft:
+  base: OneGrasp::MoveLeft 
+  # right_pos_world = []
+  move_relative_pose: [-0.2, 0.1, 90.0]
+
+Asmb_s23::OpenLeftGripper:
+  base: OpenLeftGripperStep
+
+Asmb_s24::TwoGrasp::ReqRemoveLeft:
+  base: TwoGrasp::ReqRemoveLeft
+
+Asmb_s25::TwoGrasp::RemoveLeft:
+  base: TwoGrasp::RemoveLeft
 

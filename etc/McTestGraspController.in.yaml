@@ -149,10 +149,14 @@ transitions:
   - [Asmb_s14::TwoGrasp::RemoveLeft, RemovedLeft, Asmb_s15::OneGrasp::MoveRight, Auto] 
   - [Asmb_s15::OneGrasp::MoveRight, MovedOK, Asmb_s16::OneGrasp::MoveRight, Strict] 
   - [Asmb_s16::OneGrasp::MoveRight, MovedOK, Asmb_s17::OneGrasp::AddLeftRelative, Strict] 
-  - [Asmb_s17::OneGrasp::AddLeftRelative, AddedHand, Asmb_s18::CloseRightGripper, Strict] 
-  - [Asmb_s18::CloseRightGripper, OK, Asmb_s19::OpenRightGripper, Strict] 
+  - [Asmb_s17::OneGrasp::AddLeftRelative, AddedHand, Asmb_s18::CloseLeftGripper, Strict] 
+  - [Asmb_s18::CloseLeftGripper, OK, Asmb_s19::OpenRightGripper, Strict] 
   - [Asmb_s19::OpenRightGripper, OK, Asmb_s20::TwoGrasp::ReqRemoveRight, Auto] 
   - [Asmb_s20::TwoGrasp::ReqRemoveRight, ReqRemoveRight, Asmb_s21::TwoGrasp::RemoveRight, Auto] 
+  - [Asmb_s21::TwoGrasp::RemoveRight, RemovedRight, Asmb_s22::OneGrasp::MoveLeft, Auto] 
+  - [Asmb_s22::OneGrasp::MoveLeft, MovedOK, Asmb_s23::OpenLeftGripper, Auto] 
+  - [Asmb_s23::OpenLeftGripper, OK, Asmb_s24::TwoGrasp::ReqRemoveLeft, Auto] 
+  - [Asmb_s24::TwoGrasp::ReqRemoveLeft, ReqRemoveLeft, Asmb_s25::TwoGrasp::RemoveLeft, Auto] 
 
 # Initial state
 ## manual mode
