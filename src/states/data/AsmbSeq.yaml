@@ -35,13 +35,13 @@ Asmb_s8::TwoGrasp::RemoveRight:
 Asmb_s9::OneGrasp::MoveLeft:
   base: OneGrasp::MoveLeft 
   # right_pos_world = []
-  move_relative_pose: [-0.2, 0.0, 0.0]
+  move_relative_pose: [-0.3, 0.0, -30.0]
 
 Asmb_s10::OneGrasp::AddRightRelative:
   base: OneGrasp::AddRightRelative
   #target_relative_pose: [0.15, 0.0, 0.0]
   # -180 for the loose the limitation of the gripper rotation
-  target_relative_pose: [0.15, 0.0, -180.0]
+  target_relative_pose: [0.12, 0.05, -180.0]
 
 Asmb_s11::CloseRightGripper:
   base: CloseRightGripperStep
@@ -58,13 +58,13 @@ Asmb_s14::TwoGrasp::RemoveLeft:
 Asmb_s15::OneGrasp::MoveRight:
   base: OneGrasp::MoveRight 
   # right_pos_world = []
-  move_relative_pose: [-0.05, 0.0, 90.0]
+  move_relative_pose: [0., -0.1, 120.0]
 
 Asmb_s16::OneGrasp::MoveRight:
   base: OneGrasp::MoveRight 
   # right_pos_world = []
   # for vertical to insert
-  move_relative_pose: [0.0, 0.05, 0.0]
+  move_relative_pose: [0.02, 0.16, 45.0]
   ## for 45 degree to insert
   #move_relative_pose: [-0.05, 0.12, 45.0]
 
@@ -80,7 +80,7 @@ Asmb_s17::OneGrasp::AddLeft:
   base: OneGrasp::AddLeft
   # left_pos_world = []
   # for vertical to insert
-  target_pose: [0.0, 1.22, 90.0]
+  target_pose: [0.05, 1.21, 90.0]
   ## for 45 degree to insert
   #target_pose: [0.05, 1.22, 90.0]
 
@@ -101,12 +101,17 @@ Asmb_s22::OneGrasp::MoveLeft:
   # right_pos_world = []
   move_relative_pose: [-0.4, 0.0, -90.0]
 
-Asmb_s23::OpenLeftGripper:
+Asmb_s23::OneGrasp::MoveLeft:
+  base: OneGrasp::MoveLeft 
+  # right_pos_world = []
+  move_relative_pose: [0., -0.4, 0.]
+
+Asmb_s24::OpenLeftGripper:
   base: OpenLeftGripperStep
 
-Asmb_s24::TwoGrasp::ReqRemoveLeft:
+Asmb_s25::TwoGrasp::ReqRemoveLeft:
   base: TwoGrasp::ReqRemoveLeft
 
-Asmb_s25::TwoGrasp::RemoveLeft:
+Asmb_s26::TwoGrasp::RemoveLeft:
   base: TwoGrasp::RemoveLeft
 
