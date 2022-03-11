@@ -193,7 +193,7 @@ StabilizerTask:
   type: lipm_stabilizer
   contacts: [Left, Right]
   admittance:
-    cop: [0.04, 0.04]
+    cop: [0.004, 0.004]
     maxVel:
       angular: [3.0, 3.0, 3.0]
       linear: [0.5, 0.5, 0.5]
