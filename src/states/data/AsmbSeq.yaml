@@ -18,7 +18,7 @@ Asmb_s3::OneGrasp::MoveRight:
 Asmb_s4::OneGrasp::AddLeftRelative:
   base: OneGrasp::AddLeftRelative
   # left_pos_world = []
-  target_relative_pose: [-0.15, 0.0, 0.0]
+  target_relative_pose: [-0.15, -0.03, 0.0]
 
 Asmb_s5::CloseLeftGripper:
   base: CloseLeftGripperStep
@@ -64,7 +64,7 @@ Asmb_s16::OneGrasp::MoveRight:
   base: OneGrasp::MoveRight 
   # right_pos_world = []
   # for vertical to insert
-  move_relative_pose: [0.02, 0.16, 45.0]
+  move_relative_pose: [0.03, 0.18, 45.0]
   ## for 45 degree to insert
   #move_relative_pose: [-0.05, 0.12, 45.0]
 
