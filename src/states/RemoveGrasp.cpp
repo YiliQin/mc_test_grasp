@@ -16,12 +16,12 @@ void RemoveGrasp::start(mc_control::fsm::Controller & ctl_)
 
   if (active_hand_ == "Left")
   {
-    remove_hand_pose_ = ctl.robot().surfacePose("LeftGripper");
+    remove_hand_pose_ = ctl.robot().surfacePose(ctl.leftHandSurface);
     target_ = ctl.left_init_pose_;
   }
   else if (active_hand_ == "Right")
   {
-    remove_hand_pose_ = ctl.robot().surfacePose("RightGripper");
+    remove_hand_pose_ = ctl.robot().surfacePose(ctl.rightHandSurface);
     target_ = ctl.right_init_pose_;
   }
   else ;
@@ -41,13 +41,13 @@ bool RemoveGrasp::run(mc_control::fsm::Controller & ctl_)
     if (active_hand_ == "Left")        
     {
       ctl.solver().removeTask(ctl.leftHandTask_);
-      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", reach_duration_, 1000.0, 1000, {}));
+      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(), ctl.leftHandSurface, reach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.leftHandTask_; 
     }                                  
     else if (active_hand_ == "Right")  
     {                                  
       ctl.solver().removeTask(ctl.rightHandTask_);
-      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", reach_duration_, 1000.0, 1000, {}));
+      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(), ctl.rightHandSurface, reach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.rightHandTask_;
     }                                  
     else ;                             
@@ -63,14 +63,14 @@ bool RemoveGrasp::run(mc_control::fsm::Controller & ctl_)
     if (active_hand_ == "Left")        
     {
       ctl.solver().removeTask(ctl.leftHandTask_);
-      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", approach_duration_, 1000.0, 1000, {}));
+      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(), ctl.leftHandSurface, approach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.leftHandTask_; 
       activeTask_->posWaypoints(left_waypoints_);
     }                                  
     else if (active_hand_ == "Right")  
     {                                  
       ctl.solver().removeTask(ctl.rightHandTask_);
-      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", approach_duration_, 1000.0, 1000, {}));
+      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(), ctl.rightHandSurface, approach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.rightHandTask_;
       activeTask_->posWaypoints(right_waypoints_);
     }                                  

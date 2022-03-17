@@ -233,7 +233,7 @@ LookAtHandTask:
 
 LeftHandTask:
   type: bspline_trajectory 
-  surface: LeftGripper
+  surface: InternLeftHandBobbin
   weight: 200
   stiffness: 100.0
   duration: 10.0
@@ -255,7 +255,7 @@ LeftHandTask:
 
 RightHandTask:
   type: bspline_trajectory 
-  surface: RightGripper
+  surface: InternRightHandBobbin
   weight: 200
   stiffness: 100.0
   duration: 10.0

@@ -22,8 +22,10 @@ McTestGraspController::McTestGraspController(mc_rbdyn::RobotModulePtr rm, double
   solver().addTask(lookAtHandTask_);
 
   // store initial poses for two hand
-  left_init_pose_ = robot().surfacePose("LeftGripper"); 
-  right_init_pose_ = robot().surfacePose("RightGripper"); 
+  config("LeftHandTask")("surface", leftHandSurface);
+  config("RightHandTask")("surface", rightHandSurface);
+  left_init_pose_ = robot().surfacePose(leftHandSurface); 
+  right_init_pose_ = robot().surfacePose(rightHandSurface); 
 
   leftHandTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::BSplineTrajectoryTask>(solver(), config("LeftHandTask"));
   leftHandTask_->target(left_init_pose_);

@@ -22,9 +22,9 @@ void OneGrasp::start(mc_control::fsm::Controller & ctl_)
   createGui(ctl);
 
   if (hand_to_add_ == "Left")
-    grasping_hand_pose_ = ctl.robot().surfacePose("RightGripper");
+    grasping_hand_pose_ = ctl.robot().surfacePose(ctl.rightHandSurface);
   else if (hand_to_add_ == "Right")
-    grasping_hand_pose_ = ctl.robot().surfacePose("LeftGripper");
+    grasping_hand_pose_ = ctl.robot().surfacePose(ctl.leftHandSurface);
   else ;
 
   hand_surface_pose_.translation() = Eigen::Vector3d::Zero();
@@ -61,9 +61,9 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
   auto & ctl = static_cast<McTestGraspController &>(ctl_);
 
   if (hand_to_add_ == "Left")
-    grasping_hand_pose_ = ctl.robot().surfacePose("RightGripper");
+    grasping_hand_pose_ = ctl.robot().surfacePose(ctl.rightHandSurface);
   else if (hand_to_add_ == "Right")
-    grasping_hand_pose_ = ctl.robot().surfacePose("LeftGripper");
+    grasping_hand_pose_ = ctl.robot().surfacePose(ctl.leftHandSurface);
   else ;
 
   if (remove_)
@@ -77,13 +77,13 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
     if (hand_to_add_ == "Left")
     {
       ctl.solver().removeTask(ctl.rightHandTask_);
-      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", move_duration_, 1000.0, 1000, target_));
+      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(), ctl.rightHandSurface, move_duration_, 1000.0, 1000, target_));
       activeTask_ = ctl.rightHandTask_;
     }
     else if (hand_to_add_ == "Right")
     {
       ctl.solver().removeTask(ctl.leftHandTask_);
-      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", move_duration_, 1000.0, 1000, target_));
+      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(), ctl.leftHandSurface, move_duration_, 1000.0, 1000, target_));
       activeTask_ = ctl.leftHandTask_;
     }
     else ; 
@@ -111,14 +111,14 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
     if (hand_to_add_ == "Left")
     {
       ctl.solver().removeTask(ctl.leftHandTask_);
-      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", approach_duration_, 1000.0, 1000, {}));
+      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(), ctl.leftHandSurface, approach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.leftHandTask_;
       activeTask_->posWaypoints(left_waypoints_);
     }
     else if (hand_to_add_ == "Right")
     {
       ctl.solver().removeTask(ctl.rightHandTask_);
-      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", approach_duration_, 1000.0, 1000, {}));
+      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(), ctl.rightHandSurface, approach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.rightHandTask_;
       activeTask_->posWaypoints(right_waypoints_);
     }
@@ -136,13 +136,13 @@ bool OneGrasp::run(mc_control::fsm::Controller & ctl_)
     if (hand_to_add_ == "Left")
     {
       ctl.solver().removeTask(ctl.leftHandTask_);
-      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"LeftGripper", reach_duration_, 1000.0, 1000, {}));
+      ctl.leftHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(), ctl.leftHandSurface, reach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.leftHandTask_;
     }
     else if (hand_to_add_ == "Right")
     {
       ctl.solver().removeTask(ctl.rightHandTask_);
-      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(),"RightGripper", reach_duration_, 1000.0, 1000, {}));
+      ctl.rightHandTask_.reset(new mc_tasks::BSplineTrajectoryTask(ctl.robots(), ctl.robot().robotIndex(), ctl.rightHandSurface, reach_duration_, 1000.0, 1000, {}));
       activeTask_ = ctl.rightHandTask_;
     }
     else ; 

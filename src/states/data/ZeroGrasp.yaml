@@ -16,7 +16,8 @@ ZeroGraspStep:
   base: ZeroGrasp
   hand: Left
   target_pose: [0.0, 1.0, 0.0]
-  plane_depth: 0.6
+  #plane_depth: 0.6
+  plane_depth: 0.48
   approach_depth: 0.18
   approach_duration: 10.0
   reach_duration: 5.0
