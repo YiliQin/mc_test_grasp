@@ -121,4 +121,5 @@ Asmb_s25::TwoGrasp::ReqRemoveLeft:
 
 Asmb_s26::TwoGrasp::RemoveLeft:
   base: TwoGrasp::RemoveLeft
+  left_waypoints: [ [0.3, 0.6, 0.6] ]
 
