@@ -17,6 +17,7 @@ S3::OneGrasp::AddLeftRelative:
   target_relative_pose: [0.0, 0.15, 0.0] # distance = 15cm
   #target_relative_pose: [0.0, 0.12, 0.0] # distance = 12cm
   #target_relative_pose: [0.0, 0.10, 0.0] # distance = 10cm
+  left_waypoints: [ [0.4, 0.6, 1.2] ]
 
 S4::CloseLeftGripper:
   base: CloseLeftGripperStep
@@ -29,6 +30,7 @@ S6::TwoGrasp::ReqRemoveLeft:
 
 S7::TwoGrasp::RemoveLeft:
   base: TwoGrasp::RemoveLeft
+  left_waypoints: [ [0.4, 0.6, 1.2] ]
 
 # theta: 45
 S8::OneGrasp::MoveRight:
